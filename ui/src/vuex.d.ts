@@ -6,7 +6,7 @@ declare module "@vue/runtime-core"
 	// declare your own store states
 	interface State
 	{
-
+		auth: boolean;
 	}
 
 	// provide typings for `this.$store`
