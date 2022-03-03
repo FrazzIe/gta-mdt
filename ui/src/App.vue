@@ -1,10 +1,15 @@
 <style>
 	#app
 	{
-		font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+		--app-tabs-padding-top: 0.5em;
+		--app-tabs-tab-height: 42px;
+		--app-tabs-tab-border-radius: 0;
+		--app-tabs-height-offset: calc(var(--app-tabs-padding-top) + var(--app-tabs-tab-height));
 	}
+	
+	/* App layout */
 
-	#app .el-container
+	.app-container
 	{
 		position: absolute;
 
@@ -17,101 +22,66 @@
 		transform: translate(-50%, -50%);
 	}
 
-	.el-header
+	/* Tabulation */
+
+	.app-tabs
 	{
-		display: flex;
-
-		border: 1px solid var(--el-border-color-base);
-		border-bottom: none;
-
-		align-items: center;
-
-		color: var(--el-color-info-dark-2);
-		font-size: 1.5rem;
+		padding-top: var(--app-tabs-padding-top);
 	}
 
-	.el-main
+	.app-tabs .app-tabs-prefix
 	{
-		padding: 0;
-
-		border: 1px solid var(--el-border-color-base);
-		border-top: none;
+		padding-left: 16px;
 	}
 
-	/*
-		Tab navigation tweaks
-	*/
-
-	.el-main .el-tabs .el-tabs__nav-prev
+	.app-tabs .app-tabs-pane-content
 	{
-		left: 0.3em;
-		line-height: 52px;
-	}
+		position: absolute;
 
-	.el-main .el-tabs :is(.el-tabs__nav-prev, .el-tabs__nav-next) .el-icon,
-	.el-main .el-tabs :is(.el-tabs__nav-prev, .el-tabs__nav-next) .el-icon svg
-	{
-		width: 1.5em;
-		height: 1.5em;
-	}
+		height: calc(100% - var(--app-tabs-height-offset));
 
-	.el-main .el-tabs .el-tabs__nav-next
-	{
-		right: 0.3em;
-		line-height: 52px;
-	}
+		padding: 0.5em;
 
-	.el-main .el-tabs.el-tabs--border-card
-	{
-		border: none;
-		box-shadow: none;
-	}
+		/* background-color: cadetblue; */
 
-	
-	.el-main .el-tabs.el-tabs--card .el-tabs__nav
-	{
-		display: flex;
-		gap: 5px;
-
-		border: none;
-		border-radius: 0;
-
-		padding: 0px 0.4em;
-	}
-
-	.el-main .el-tabs.el-tabs--card .el-tabs__item
-	{
-		border-top: 1px solid var(--el-border-color-light);
-		border-left: 1px solid var(--el-border-color-light);
-		border-right: 1px solid var(--el-border-color-light);
+		box-sizing: border-box;
 	}
 </style>
 
 <template>
-	<el-container class="mdt-container">
-		<el-header>
-			Mobile Data Terminal
-		</el-header>
-		<el-main>
-			<el-tabs type="card">
-				<el-tab-pane v-for="i in 40" label="Overview">
-					Content
-				</el-tab-pane>
-				<el-tab-pane label="+">
-					Content
-				</el-tab-pane>
-			</el-tabs>
-		</el-main>
-	</el-container>
+	<n-config-provider :theme="darkTheme">
+		<n-card class="app-container" content-style="padding: 0;">
+			<n-tabs
+				class="app-tabs" 
+				tab-style="border-radius: var(--app-tabs-border-radius); height: var(--app-tabs-tab-height);" 
+				pane-class="app-tabs-pane-content" 
+				type="card" 
+				size="large" 
+				closable 
+				addable
+			>
+				<template #prefix>
+					<span class="app-tabs-prefix">Mobile Data Terminal</span>
+				</template>
+
+				<n-tab-pane name="home" tab="Home" :closable="false">
+					Dynamic Content
+				</n-tab-pane>
+			</n-tabs>
+		</n-card>
+	</n-config-provider>
 </template>
 
 <script lang="ts">
 	import { defineComponent } from "vue";
+	import { darkTheme } from "naive-ui";
 
 	export default defineComponent({
 		setup()
 		{
-			return {}
+			return {
+				darkTheme
+			}
 		}
 	});
 </script>

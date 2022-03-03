@@ -8,7 +8,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "element-plus": "^2.0.4",
+    "naive-ui": "^2.26.0",
+    "vfonts": "^0.0.3",
     "vue": "^3.2.25",
     "vuex": "^4.0.2"
   },
