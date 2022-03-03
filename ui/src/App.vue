@@ -58,7 +58,7 @@
 				type="card" 
 				size="large" 
 				closable 
-				addable
+				:addable="addableTab"
 			>
 				<template #prefix>
 					<span class="app-tabs-prefix">Mobile Data Terminal</span>
@@ -74,9 +74,18 @@
 
 <script lang="ts">
 	import { defineComponent } from "vue";
+	import { mapState } from "vuex";
 	import { darkTheme } from "naive-ui";
 
 	export default defineComponent({
+		computed:
+		{
+			addableTab()
+			{
+				return { disabled: !this.$store.state.auth };
+			},
+			...mapState(["auth"])
+		},
 		setup()
 		{
 			return {
