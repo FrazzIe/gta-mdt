@@ -27,8 +27,17 @@
 
 	.el-header
 	{
+		display: flex;
+
 		border: 1px solid var(--el-border-color-base);
 		border-bottom: none;
+
+		align-items: center;
+
+		color: var(--el-color-white);
+		font-size: 2rem;
+
+		background-color: var(--el-color-info);
 	}
 
 	.el-main
@@ -51,6 +60,7 @@
 <template>
 	<el-container class="mdt-container">
 		<el-header>
+			Mobile Data Terminal
 		</el-header>
 		<el-main>
 			<el-tabs type="border-card">
