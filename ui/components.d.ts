@@ -6,14 +6,6 @@ declare module 'vue' {
   export interface GlobalComponents {
     NCard: typeof import('naive-ui')['NCard']
     NConfigProvider: typeof import('naive-ui')['NConfigProvider']
-    NH2: typeof import('naive-ui')['NH2']
-    NH6: typeof import('naive-ui')['NH6']
-    NLayout: typeof import('naive-ui')['NLayout']
-    NLayoutContent: typeof import('naive-ui')['NLayoutContent']
-    NLayoutFooter: typeof import('naive-ui')['NLayoutFooter']
-    NLayoutHeader: typeof import('naive-ui')['NLayoutHeader']
-    NLayoutSider: typeof import('naive-ui')['NLayoutSider']
-    NTab: typeof import('naive-ui')['NTab']
     NTabPane: typeof import('naive-ui')['NTabPane']
     NTabs: typeof import('naive-ui')['NTabs']
   }

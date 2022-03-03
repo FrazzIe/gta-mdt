@@ -1378,18 +1378,6 @@ typescript@^4.5.4:
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.6.2.tgz#fe12d2727b708f4eef40f51598b3398baa9611d4"
   integrity sha512-HM/hFigTBHZhLXshn9sN37H085+hQGeJHJ/X7LpBWLID/fbc2acUMfU+lGD98X81sKP+pFa9f0DZmCwB9GnbAg==
 
-unplugin-auto-import@^0.6.1:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/unplugin-auto-import/-/unplugin-auto-import-0.6.1.tgz#2c6fe2f76e9da7f274504e09634d498e59ed2f61"
-  integrity sha512-rSukyyROmSkqL9tjkA88oLhpG4tXYkk2rTpqGaYKjXRNktHEKf03pit8bamPt95KPVfMLjT0+TPKi6ju0toOIw==
-  dependencies:
-    "@antfu/utils" "^0.5.0"
-    "@rollup/pluginutils" "^4.1.2"
-    local-pkg "^0.4.1"
-    magic-string "^0.25.7"
-    resolve "^1.22.0"
-    unplugin "^0.3.2"
-
 unplugin-icons@^0.13.2:
   version "0.13.2"
   resolved "https://registry.yarnpkg.com/unplugin-icons/-/unplugin-icons-0.13.2.tgz#c85fb6e68c0d041099a1534dca204f99943c8d7d"
