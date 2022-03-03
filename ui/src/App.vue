@@ -4,7 +4,7 @@
 		font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
 	}
 
-	.mdt-container
+	#app .el-container
 	{
 		position: absolute;
 
@@ -15,14 +15,6 @@
 		top: 50%;
 
 		transform: translate(-50%, -50%);
-
-		/* background-color: cadetblue; */
-		/* border: 1px solid cornflowerblue; */
-	}
-
-	.mdt-container .el-main
-	{
-		padding: 0;
 	}
 
 	.el-header
@@ -40,18 +32,58 @@
 
 	.el-main
 	{
+		padding: 0;
+
 		border: 1px solid var(--el-border-color-base);
+		border-top: none;
 	}
 
-	.el-main .el-tabs
+	/*
+		Tab navigation tweaks
+	*/
+
+	.el-main .el-tabs .el-tabs__nav-prev
 	{
-		height: max-content;
+		left: 0.3em;
+		line-height: 52px;
+	}
+
+	.el-main .el-tabs :is(.el-tabs__nav-prev, .el-tabs__nav-next) .el-icon,
+	.el-main .el-tabs :is(.el-tabs__nav-prev, .el-tabs__nav-next) .el-icon svg
+	{
+		width: 1.5em;
+		height: 1.5em;
+	}
+
+	.el-main .el-tabs .el-tabs__nav-next
+	{
+		right: 0.3em;
+		line-height: 52px;
 	}
 
 	.el-main .el-tabs.el-tabs--border-card
 	{
 		border: none;
 		box-shadow: none;
+	}
+
+	
+	.el-main .el-tabs.el-tabs--card .el-tabs__nav
+	{
+		display: flex;
+		gap: 5px;
+
+		border: none;
+		border-radius: 0;
+
+		padding: 0px 0.4em;
+	}
+
+	.el-main .el-tabs.el-tabs--card .el-tabs__item
+	{
+		border-top: 1px solid var(--el-border-color-light);
+		border-left: 1px solid var(--el-border-color-light);
+		border-right: 1px solid var(--el-border-color-light);
 	}
 </style>
 
@@ -61,8 +93,11 @@
 			Mobile Data Terminal
 		</el-header>
 		<el-main>
-			<el-tabs type="border-card">
-				<el-tab-pane v-for="i in 40" :label="'Tab ' + i">
+			<el-tabs type="card">
+				<el-tab-pane v-for="i in 40" label="Overview">
+					Content
+				</el-tab-pane>
+				<el-tab-pane label="+">
 					Content
 				</el-tab-pane>
 			</el-tabs>
