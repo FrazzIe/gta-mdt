@@ -34,10 +34,8 @@
 
 		align-items: center;
 
-		color: var(--el-color-white);
-		font-size: 2rem;
-
-		background-color: var(--el-color-info);
+		color: var(--el-color-info-dark-2);
+		font-size: 1.5rem;
 	}
 
 	.el-main
