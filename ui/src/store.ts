@@ -22,8 +22,25 @@ export const store = createStore<State>({
 		lastTabId: 0,
 		tabs:
 		[
-			{ id: "0-home", label: "Home", component: "mdt-home", closable: false }
+			{ id: "tab-0", label: "Home", component: "mdt-home", closable: false }
 		]
+	},
+	mutations:
+	{
+		/**
+		 * Add new tab
+		 * @param state application state
+		 */
+		newTab(state)
+		{
+			state.tabs[state.tabs.length] = 
+			{ 
+				id: `tab-${++state.lastTabId}`,
+				label: "New Tab",
+				component: "mdt-new",
+				closable: true
+			};
+		}
 	}
 });
 

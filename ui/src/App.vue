@@ -59,6 +59,7 @@
 				size="large" 
 				closable 
 				:addable="addableTab" 
+				@add="onNewTab"
 			>
 				<template #prefix>
 					<span class="app-tabs-prefix">Mobile Data Terminal</span>
@@ -75,8 +76,13 @@
 <script lang="ts">
 	import { defineComponent } from "vue";
 	import { mapState } from "vuex";
-	import { darkTheme } from "naive-ui";
 
+	// components
+	// TODO
+
+	// theme
+	import { darkTheme } from "naive-ui";
+	
 	export default defineComponent({
 		computed:
 		{
@@ -85,6 +91,16 @@
 				return { disabled: !this.$store.state.auth };
 			},
 			...mapState(["auth", "tabs"])
+		},
+		methods:
+		{
+			/**
+			 * Add new tab
+			 */
+			onNewTab()
+			{
+				this.$store.commit("newTab");
+			}
 		},
 		setup()
 		{
