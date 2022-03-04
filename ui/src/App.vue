@@ -34,6 +34,11 @@
 		padding-left: 16px;
 	}
 
+	.app-tabs .app-tabs-suffix
+	{
+		padding-right: 16px;
+	}
+
 	.app-tabs .app-tabs-pane-content
 	{
 		position: absolute;
@@ -69,6 +74,12 @@
 				<n-tab-pane v-for="(pane, idx) in tabs" :key="idx" :name="pane.id" :tab="pane.label" :closable="pane.closable" display-directive="show:lazy">
 					Dynamic Content
 				</n-tab-pane>
+
+				<template #suffix>
+					<div class="app-tabs-suffix">
+						Empty
+					</div>
+				</template>
 			</n-tabs>
 		</n-card>
 	</n-config-provider>
