@@ -64,7 +64,7 @@
 					<span class="app-tabs-prefix">Mobile Data Terminal</span>
 				</template>
 
-				<n-tab-pane v-for="(pane, idx) in tabs" :key="idx" :name="pane.id" :tab="pane.label" :closable="false">
+				<n-tab-pane v-for="(pane, idx) in tabs" :key="idx" :name="pane.id" :tab="pane.label" :closable="false" display-directive="show:lazy">
 					Dynamic Content
 				</n-tab-pane>
 			</n-tabs>
