@@ -59,6 +59,7 @@
 				:addable="addableTab" 
 				:value="curTabId"
 				@add="onNewTab"
+				@close="onCloseTab"
 				@update:value="onUpdateTab"
 			>
 				<template #prefix>
@@ -100,6 +101,13 @@
 			onNewTab()
 			{
 				this.$store.commit("newTab");
+			},
+			/**
+			 * Close tab
+			 */
+			onCloseTab(name: string)
+			{
+				this.$store.commit("closeTab", { id: name });
 			},
 			/**
 			 * Update tab

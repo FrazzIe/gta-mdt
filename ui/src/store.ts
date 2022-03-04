@@ -48,6 +48,32 @@ export const store = createStore<State>({
 			state.curTabId = `tab-${id}`;
 		},
 		/**
+		 * Close tab
+		 * @param state application state
+		 */
+		closeTab(state: State, payload: { id: string })
+		{
+			// loop through each tab starting from the end
+			for (let i = state.tabs.length - 1; i > 0; i--)
+			{
+				console.log(i);
+				// check for a match
+				if (state.tabs[i].id == payload.id)
+				{
+					// remove tab
+					state.tabs.splice(i, 1);
+
+					// change index if tab is selected
+					if (state.curTabId == payload.id)
+					{
+						state.curTabId = state.tabs[i - 1].id;
+					}
+					
+					break;
+				}
+			}
+		},
+		/**
 		 * Update tab
 		 * @param state application state
 		 */
