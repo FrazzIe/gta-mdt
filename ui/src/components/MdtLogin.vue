@@ -21,7 +21,7 @@
 
 <template>
 	<div class="app-login-container">
-		<!-- Login Logo-->
+		<!-- Login Logo -->
 		<div class="logo">
 			<n-icon size="8em">
 				<i-tabler-user/>
@@ -29,13 +29,13 @@
 		</div>
 
 		<!-- Login Form -->
-		<n-form :model="loginForm">
+		<n-form ref="form" :model="login">
 			<n-form-item label="Username" path="usernmae">
-				<n-input v-model:value="loginForm.username" placeholder="Enter username"></n-input>
+				<n-input v-model:value="login.username" placeholder="Enter username"></n-input>
 			</n-form-item>
 
 			<n-form-item label="Password" path="password">
-				<n-input type="password" v-model:value="loginForm.password" placeholder="Enter password"></n-input>
+				<n-input type="password" v-model:value="login.password" placeholder="Enter password"></n-input>
 			</n-form-item>
 
 			<n-button>Login</n-button>
@@ -46,16 +46,26 @@
 <script lang="ts">
 	import { defineComponent, ref } from "vue";
 
+	// interfaces
+	import { FormInst } from "naive-ui";
+
 	export default defineComponent({
 		setup()
 		{
-			const loginForm = ref({
+			const form = ref<FormInst | null>(null);
+			const login = ref({
 				username: "",
 				password: ""
 			});
+			const rules =
+			{
+				
+			};
 
 			return {
-				loginForm
+				form,
+				login,
+				rules
 			}
 		}
 	});
