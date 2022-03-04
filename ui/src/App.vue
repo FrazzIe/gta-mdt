@@ -42,8 +42,6 @@
 
 		padding: 0.5em;
 
-		/* background-color: cadetblue; */
-
 		box-sizing: border-box;
 	}
 </style>
