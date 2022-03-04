@@ -21,21 +21,24 @@
 
 <template>
 	<div class="app-login-container">
+		<!-- Login Logo-->
 		<div class="logo">
 			<n-icon size="8em">
 				<i-tabler-user/>
 			</n-icon>
 		</div>
+
+		<!-- Login Form -->
 		<n-form :model="loginForm">
 			<n-form-item label="Username" path="usernmae">
 				<n-input v-model:value="loginForm.username" placeholder="Enter username"></n-input>
 			</n-form-item>
+
 			<n-form-item label="Password" path="password">
 				<n-input type="password" v-model:value="loginForm.password" placeholder="Enter password"></n-input>
 			</n-form-item>
-			<n-form-item>
-				<n-button>Login</n-button>
-			</n-form-item>
+
+			<n-button>Login</n-button>
 		</n-form>
 	</div>
 </template>
