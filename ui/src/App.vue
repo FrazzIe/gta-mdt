@@ -72,7 +72,7 @@
 				</template>
 
 				<n-tab-pane v-for="(pane, idx) in tabs" :key="idx" :name="pane.id" :tab="pane.label" :closable="pane.closable" display-directive="show:lazy">
-					Dynamic Content
+					<component :is="pane.component"></component>
 				</n-tab-pane>
 
 				<template #suffix>
@@ -90,6 +90,8 @@
 	import { mapState } from "vuex";
 
 	// components
+	import MdtHomeTab from "./components/tabs/MdtHomeTab.vue";
+	import MdtNewTab from "./components/tabs/MdtNewTab.vue";
 	// TODO
 
 	// theme
@@ -98,6 +100,11 @@
 	const CUSTOM_TAB_LIMIT = 8;
 
 	export default defineComponent({
+		components:
+		{
+			MdtHomeTab,
+			MdtNewTab
+		},
 		computed:
 		{
 			addableTab()

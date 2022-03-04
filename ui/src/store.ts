@@ -24,7 +24,7 @@ export const store = createStore<State>({
 		curTabId: "tab-0",
 		tabs:
 		[
-			{ id: "tab-0", label: "Home", component: "mdt-home", closable: false }
+			{ id: "tab-0", label: "Home", component: "mdt-home-tab", closable: false }
 		]
 	},
 	mutations:
@@ -41,7 +41,7 @@ export const store = createStore<State>({
 			{
 				id: `tab-${id}`,
 				label: "New Tab",
-				component: "mdt-new",
+				component: "mdt-new-tab",
 				closable: true
 			}
 
