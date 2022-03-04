@@ -38,7 +38,7 @@
 				<n-input type="password" v-model:value="login.password" placeholder="Enter password"></n-input>
 			</n-form-item>
 
-			<n-button>Login</n-button>
+			<n-button @click="submit">Login</n-button>
 		</n-form>
 	</div>
 </template>
@@ -47,9 +47,28 @@
 	import { defineComponent, ref } from "vue";
 
 	// interfaces
-	import { FormInst, FormItemRule, FormRules } from "naive-ui";
+	import { FormInst, FormItemRule, FormRules, FormValidationError } from "naive-ui";
 
 	export default defineComponent({
+		methods:
+		{
+			submit(event: MouseEvent)
+			{
+				event.preventDefault();
+
+				this.form?.validate((errors: FormValidationError[] | undefined) =>
+				{
+					if (!errors)
+					{
+						console.log("valid");
+					}
+					else
+					{
+						console.log(errors);
+					}
+				});
+			}
+		},
 		setup()
 		{
 			const form = ref<FormInst | null>(null);
