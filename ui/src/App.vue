@@ -57,7 +57,9 @@
 				size="large" 
 				closable 
 				:addable="addableTab" 
+				:value="curTabId"
 				@add="onNewTab"
+				@update:value="onUpdateTab"
 			>
 				<template #prefix>
 					<span class="app-tabs-prefix">Mobile Data Terminal</span>
@@ -88,7 +90,7 @@
 			{
 				return { disabled: !this.$store.state.auth };
 			},
-			...mapState(["auth", "tabs"])
+			...mapState(["auth", "tabs", "curTabId"])
 		},
 		methods:
 		{
@@ -98,6 +100,13 @@
 			onNewTab()
 			{
 				this.$store.commit("newTab");
+			},
+			/**
+			 * Update tab
+			 */
+			onUpdateTab(name: string)
+			{
+				this.$store.commit("updateTab", { id: name });
 			}
 		},
 		setup()

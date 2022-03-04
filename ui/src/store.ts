@@ -9,6 +9,7 @@ export interface State
 {
 	auth: boolean;
 	lastTabId: number;
+	curTabId: string;
 	tabs: TabNavItem[];
 }
 
@@ -20,6 +21,7 @@ export const store = createStore<State>({
 	{
 		auth: false,
 		lastTabId: 0,
+		curTabId: "tab-0",
 		tabs:
 		[
 			{ id: "tab-0", label: "Home", component: "mdt-home", closable: false }
@@ -31,15 +33,27 @@ export const store = createStore<State>({
 		 * Add new tab
 		 * @param state application state
 		 */
-		newTab(state)
+		newTab(state: State)
 		{
-			state.tabs[state.tabs.length] = 
-			{ 
-				id: `tab-${++state.lastTabId}`,
+			const id = ++state.lastTabId;
+
+			state.tabs[state.tabs.length] =
+			{
+				id: `tab-${id}`,
 				label: "New Tab",
 				component: "mdt-new",
 				closable: true
-			};
+			}
+
+			state.curTabId = `tab-${id}`;
+		},
+		/**
+		 * Update tab
+		 * @param state application state
+		 */
+		updateTab(state: State, payload: { id: string })
+		{
+			state.curTabId = payload.id;
 		}
 	}
 });
