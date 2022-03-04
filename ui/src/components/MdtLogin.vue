@@ -30,7 +30,7 @@
 
 		<!-- Login Form -->
 		<n-form ref="form" :model="login">
-			<n-form-item label="Username" path="usernmae">
+			<n-form-item label="Username" path="username">
 				<n-input v-model:value="login.username" placeholder="Enter username"></n-input>
 			</n-form-item>
 
