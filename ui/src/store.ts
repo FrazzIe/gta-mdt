@@ -8,6 +8,7 @@ import TabNavItem from "./interfaces/TabNavItem";
 export interface State
 {
 	auth: boolean;
+	lastTabId: number;
 	tabs: TabNavItem[];
 }
 
@@ -18,9 +19,10 @@ export const store = createStore<State>({
 	state:
 	{
 		auth: false,
+		lastTabId: 0,
 		tabs:
 		[
-			{ label: "Home", component: "mdt-home", closable: false }
+			{ id: "0-home", label: "Home", component: "mdt-home", closable: false }
 		]
 	}
 });

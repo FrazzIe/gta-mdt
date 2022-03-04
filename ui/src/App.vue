@@ -58,13 +58,13 @@
 				type="card" 
 				size="large" 
 				closable 
-				:addable="addableTab"
+				:addable="addableTab" 
 			>
 				<template #prefix>
 					<span class="app-tabs-prefix">Mobile Data Terminal</span>
 				</template>
 
-				<n-tab-pane name="home" tab="Home" :closable="false">
+				<n-tab-pane v-for="(pane, idx) in tabs" :key="idx" :name="pane.id" :tab="pane.label" :closable="false">
 					Dynamic Content
 				</n-tab-pane>
 			</n-tabs>
@@ -84,7 +84,7 @@
 			{
 				return { disabled: !this.$store.state.auth };
 			},
-			...mapState(["auth"])
+			...mapState(["auth", "tabs"])
 		},
 		setup()
 		{

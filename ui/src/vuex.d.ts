@@ -10,6 +10,7 @@ declare module "@vue/runtime-core"
 	interface State
 	{
 		auth: boolean;
+		lastTabId: number;
 		tabs: TabNavItem[];
 	}
 
