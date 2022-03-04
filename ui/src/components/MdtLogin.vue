@@ -29,7 +29,7 @@
 		</div>
 
 		<!-- Login Form -->
-		<n-form ref="form" :model="login">
+		<n-form ref="form" :model="login" :rules="rules">
 			<n-form-item label="Username" path="username">
 				<n-input v-model:value="login.username" placeholder="Enter username"></n-input>
 			</n-form-item>
@@ -47,7 +47,7 @@
 	import { defineComponent, ref } from "vue";
 
 	// interfaces
-	import { FormInst } from "naive-ui";
+	import { FormInst, FormItemRule, FormRules } from "naive-ui";
 
 	export default defineComponent({
 		setup()
@@ -57,9 +57,64 @@
 				username: "",
 				password: ""
 			});
-			const rules =
+			const rules: FormRules =
 			{
-				
+				username:
+				{
+					required: true,
+					trigger: ["input", "blur"],
+					validator(rule: FormItemRule, value: string)
+					{
+						if (!value)
+						{
+							return new Error("A username is required");
+						}
+						else if (value.length < 3)
+						{
+							return new Error("Username must be at least 3 characters long");
+						}
+						else if (value.length >= 30)
+						{
+							return new Error("Username cannot be greater than 30 characters");
+						}
+						else if (!/^(?=.{1,30}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/.test(value))
+						{
+							return new Error("Invalid username");
+						}
+
+						return true;
+					}
+				},
+				password:
+				{
+					required: true,
+					trigger: ["input", "blur"],
+					validator(rule: FormItemRule, value: string)
+					{
+						if (!value)
+						{
+							return new Error("A password is required");
+						}
+						else if (value.length < 8)
+						{
+							return new Error("Password must be at least 8 characters long");
+						}
+						else if (!/(?=.*?[A-Z])/.test(value))
+						{
+							return new Error("Password must contain at least one uppercase letter");
+						}
+						else if (!/(?=.*?[a-z])/.test(value))
+						{
+							return new Error("Password must contain at least one lowercase letter");
+						}
+						else if (!/(?=.*?[0-9])/.test(value))
+						{
+							return new Error("Password must contain at least one number");
+						}
+
+						return true;						
+					}
+				}
 			};
 
 			return {
