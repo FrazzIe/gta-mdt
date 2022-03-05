@@ -167,8 +167,16 @@
 					<n-space>
 						<n-tag type="info">Role</n-tag>
 					</n-space>					
-				</div>		
+				</div>
 			</div>
+
+			<template #action>
+				<n-space justify="end">
+					<n-button tertiary type="error" >
+						Logout
+					</n-button>
+				</n-space>
+			</template>
 		</n-card>
 
 		<n-card class="home-grid-settings" title="Settings" hoverable>
