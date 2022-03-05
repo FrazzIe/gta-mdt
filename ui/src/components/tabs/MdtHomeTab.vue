@@ -66,6 +66,29 @@
 		align-items: center;
 		justify-content: center;
 	}
+
+	/* Button Navigation Area */
+
+	.home-nav-buttons
+	{
+		--user-nav-buttons-gap: 0.5em;
+
+		display: flex;
+
+		height: 100%;
+
+		flex-direction: row;
+		flex-wrap: wrap;
+
+		gap: var(--user-nav-buttons-gap);
+	}
+
+	.home-nav-buttons > button
+	{
+		flex-basis: calc(100% * (1/4) - var(--user-nav-buttons-gap));
+		flex-grow: 1;
+	}
+
 	/* Profile Area */
 
 	.home-user-thing
@@ -223,8 +246,10 @@
 			</template>
 		</n-card>
 
-		<n-card class="home-grid-settings" title="Settings" hoverable>
-			Content
+		<n-card class="home-grid-settings" title="Explore" hoverable>
+			<div class="home-nav-buttons">
+				<n-button v-for="(nav, idx) in navBtns" :key="idx">{{ nav.label }}</n-button>
+			</div>
 		</n-card>
 
 		<n-card class="home-grid-reports" title="Reports" hoverable>
@@ -265,7 +290,16 @@
 		},
 		setup()
 		{
-			return { }
+			const navBtns: any =
+			[
+				{ label: "Warrants", component: "" },
+				{ label: "Reports", component: "" },
+				{ label: "Records", component: "" },
+				{ label: "Search", component: "" },
+				{ label: "Profile", component: "" },
+				{ label: "Admin", component: "" }
+			];
+			return { navBtns }
 		}
 	});
 </script>
