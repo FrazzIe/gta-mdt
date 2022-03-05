@@ -29,7 +29,7 @@
 		</div>
 
 		<!-- Login Form -->
-		<n-form ref="form" :model="login" :rules="rules">
+		<n-form ref="form" :model="login" :rules="rules" :disabled="disabled">
 			<n-form-item label="Username" path="username">
 				<n-input v-model:value="login.username" placeholder="Enter username"></n-input>
 			</n-form-item>
@@ -38,7 +38,7 @@
 				<n-input type="password" v-model:value="login.password" placeholder="Enter password"></n-input>
 			</n-form-item>
 
-			<n-button @click="submit">Login</n-button>
+			<n-button @click="submit" :loading="disabled">Login</n-button>
 		</n-form>
 	</div>
 </template>
@@ -56,16 +56,17 @@
 			{
 				event.preventDefault();
 
+				this.disabled = true;
+
 				this.form?.validate((errors: FormValidationError[] | undefined) =>
 				{
-					if (!errors)
+					// re-enable on error
+					if (errors != null)
 					{
-						console.log("valid");
+						this.disabled = false;
 					}
-					else
-					{
-						console.log(errors);
-					}
+
+					// TODO: POST request, re-enable
 				});
 			}
 		},
@@ -135,11 +136,13 @@
 					}
 				}
 			};
+			const disabled = ref(false);
 
 			return {
 				form,
 				login,
-				rules
+				rules,
+				disabled
 			}
 		}
 	});
