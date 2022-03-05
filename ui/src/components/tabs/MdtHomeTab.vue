@@ -1,11 +1,142 @@
 <style>
+	/* Home Grid */
 
+	.home-grid
+	{
+		display: grid;
+		
+		height: 100%;
+
+		grid-template-areas: 
+			" search     "
+			" user       "   
+			" settings   "
+			" warrants   "
+			" reports    "
+			" statistics ";
+
+		gap: 1.5rem;
+		padding: 1.5rem;
+
+		overflow: auto;
+
+		box-sizing: border-box;
+	}
+
+	/* Home Grid Areas */
+
+	.home-grid-reports
+	{
+		grid-area: reports;
+	}
+
+	.home-grid-warrants
+	{
+		grid-area: warrants;
+	}
+
+	.home-grid-statistics
+	{
+		grid-area: statistics;
+	}
+
+	.home-grid-search
+	{
+		grid-area: search;
+	}
+
+	.home-grid-user
+	{
+		grid-area: user;
+	}
+
+	.home-grid-settings
+	{
+		grid-area: settings;
+	}
+
+	/* Home Grid Media Queries */
+
+	@media only screen and (min-width: 500px)
+	{
+		.home-grid
+		{
+			grid-template-columns: 1.5fr 1fr;
+			grid-template-rows: 0.5fr 1.5fr 1fr;
+			grid-template-areas: 
+				" search     search     "
+				" user       settings   "
+				" warrants   warrants   "
+				" reports    reports    "
+				" statistics statistics ";
+		}
+	}
+
+	@media only screen and (min-width: 900px)
+	{
+		.home-grid
+		{
+			grid-template-columns: 1.2fr 1fr;
+			grid-template-rows: 0.5fr 1.5fr 0.5fr 1fr 1fr;
+			grid-template-areas: 
+				" warrants   search "
+				" warrants   user "
+				" warrants   settings "
+				" reports    reports "
+				" statistics statistics ";
+		}
+	}
+
+	@media screen and (min-width: 1200px)
+	{
+		.home-grid
+		{
+			grid-template-columns: 1fr 1.5fr 1fr;
+			grid-template-rows: 0.5fr 1.5fr 1fr;
+			grid-template-areas: 
+				" reports warrants   search "
+				" reports warrants   user "
+				" reports statistics settings ";
+		}
+	}
 </style>
 
 <template>
 	<mdt-login v-if="!auth"></mdt-login>
-	<div v-else>
-		Home
+
+	<div class="home-grid">
+		<n-card class="home-grid-search" title="Record Search" hoverable>
+			<n-input-group>
+				<n-input type="text" placeholder="Citizen ID, Name...">
+					<template #prefix>
+						<n-icon size="1.5rem">
+							<i-tabler-user-search />
+						</n-icon>
+					</template>
+				</n-input>
+				<n-button type="primary">Search</n-button>
+			</n-input-group>
+		</n-card>
+
+		<n-card class="home-grid-warrants" title="Warrants" hoverable>
+			Content
+		</n-card>
+
+		<n-card class="home-grid-user" title="User" hoverable>
+			Content
+		</n-card>
+
+		<n-card class="home-grid-settings" title="Settings" hoverable>
+			Content
+		</n-card>
+
+		<n-card class="home-grid-reports" title="Reports" hoverable>
+			Content
+		</n-card>
+
+		<n-card class="home-grid-statistics" title="Statistics" hoverable>
+			Content
+		</n-card>
 	</div>
 </template>
 
