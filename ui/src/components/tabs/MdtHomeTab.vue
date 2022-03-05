@@ -55,6 +55,17 @@
 		grid-area: settings;
 	}
 
+	/* Search Area */
+
+	.home-search
+	{
+		display: flex;
+
+		height: 100%;
+
+		align-items: center;
+		justify-content: center;
+	}
 	/* Profile Area */
 
 	.home-user-thing
@@ -140,16 +151,19 @@
 
 	<div class="home-grid">
 		<n-card class="home-grid-search" title="Record Search" hoverable>
-			<n-input-group>
-				<n-input type="text" placeholder="Citizen ID, Name...">
-					<template #prefix>
-						<n-icon size="1.5rem">
-							<i-tabler-user-search />
-						</n-icon>
-					</template>
-				</n-input>
-				<n-button type="primary">Search</n-button>
-			</n-input-group>
+			<div class="home-search">
+				<n-input-group>
+					<n-input type="text" placeholder="Citizen ID, Name...">
+						<template #prefix>
+							<n-icon size="1.5rem">
+								<i-tabler-user-search />
+							</n-icon>
+						</template>
+					</n-input>
+					<n-button type="primary">Search</n-button>
+				</n-input-group>
+			</div>
+
 
 			<template #header-extra>
 				<n-button text>
