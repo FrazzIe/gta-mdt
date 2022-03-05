@@ -126,11 +126,11 @@
 		.home-grid
 		{
 			grid-template-columns: 1fr 1.5fr 1fr;
-			grid-template-rows: 0.5fr 1.5fr 1fr;
+			grid-template-rows: 0.5fr 1fr 1fr;
 			grid-template-areas: 
-				" reports warrants   search "
-				" reports warrants   user "
-				" reports statistics settings ";
+				" settings warrants search "
+				" reports  warrants user "
+				" reports  warrants statistics ";
 		}
 	}
 </style>
