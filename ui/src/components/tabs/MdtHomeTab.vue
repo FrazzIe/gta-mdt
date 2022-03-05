@@ -55,6 +55,40 @@
 		grid-area: settings;
 	}
 
+	/* Profile Area */
+
+	.home-user-thing
+	{
+		display: flex;
+
+		gap: 1em;
+	}
+
+	.home-user-thing .hut-avatar
+	{
+		--n-avatar-size-override: 5rem;
+	}
+
+	.home-user-thing .hut-avatar-text
+	{
+		font-size: 2rem;
+	}
+
+	.home-user-thing .hut-content
+	{
+		display: flex;
+
+		flex-direction: column;
+		flex-grow: 1;
+
+		justify-content: center;
+	}
+
+	.home-user-thing .hut-content .hut-username
+	{
+		font-size: 1.5rem;
+	}
+
 	/* Home Grid Media Queries */
 
 	@media only screen and (min-width: 500px)
@@ -122,8 +156,19 @@
 			Content
 		</n-card>
 
-		<n-card class="home-grid-user" title="User" hoverable>
-			Content
+		<n-card class="home-grid-user" title="Profile" hoverable>
+			<div class="home-user-thing">
+				<n-avatar class="hut-avatar">
+					<span class="hut-avatar-text">EM</span>
+				</n-avatar>
+
+				<div class="hut-content">
+					<n-text class="hut-username">Username</n-text>
+					<n-space>
+						<n-tag type="info">Role</n-tag>
+					</n-space>					
+				</div>		
+			</div>
 		</n-card>
 
 		<n-card class="home-grid-settings" title="Settings" hoverable>
