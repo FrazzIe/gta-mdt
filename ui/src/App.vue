@@ -45,6 +45,8 @@
 
 		height: calc(100% - var(--app-tabs-height-offset));
 
+		padding: 0;
+
 		box-sizing: border-box;
 	}
 </style>
