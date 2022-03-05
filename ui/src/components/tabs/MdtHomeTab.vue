@@ -150,9 +150,29 @@
 				</n-input>
 				<n-button type="primary">Search</n-button>
 			</n-input-group>
+
+			<template #header-extra>
+				<n-button text>
+					<template #icon>
+						<n-icon>
+							<i-tabler-external-link/>
+						</n-icon>
+					</template>
+				</n-button>
+			</template>
 		</n-card>
 
 		<n-card class="home-grid-warrants" title="Warrants" hoverable>
+			<template #header-extra>
+				<n-button text>
+					<template #icon>
+						<n-icon>
+							<i-tabler-external-link/>
+						</n-icon>
+					</template>
+				</n-button>
+			</template>
+
 			Content
 		</n-card>
 
@@ -177,6 +197,16 @@
 					</n-button>
 				</n-space>
 			</template>
+
+			<template #header-extra>
+				<n-button text>
+					<template #icon>
+						<n-icon>
+							<i-tabler-external-link/>
+						</n-icon>
+					</template>
+				</n-button>
+			</template>
 		</n-card>
 
 		<n-card class="home-grid-settings" title="Settings" hoverable>
@@ -185,6 +215,16 @@
 
 		<n-card class="home-grid-reports" title="Reports" hoverable>
 			Content
+
+			<template #header-extra>
+				<n-button text>
+					<template #icon>
+						<n-icon>
+							<i-tabler-external-link/>
+						</n-icon>
+					</template>
+				</n-button>
+			</template>
 		</n-card>
 
 		<n-card class="home-grid-statistics" title="Statistics" hoverable>
