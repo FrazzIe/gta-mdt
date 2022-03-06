@@ -137,6 +137,11 @@
 		margin: 0;
 	}
 
+	.home-warrants-list .n-list-item .n-list-item__prefix
+	{
+		line-height: 0;
+	}
+
 	.home-warrants-avatar
 	{
 		--n-avatar-size-override: 5rem;		
