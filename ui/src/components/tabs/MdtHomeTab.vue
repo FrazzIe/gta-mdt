@@ -139,7 +139,12 @@
 
 	.home-warrants-avatar
 	{
-		--n-avatar-size-override: 5rem;
+		--n-avatar-size-override: 5rem;		
+	}
+
+	.home-warrants-avatar-text
+	{
+		font-size: 2rem;
 	}
 
 	/* Home Grid Media Queries */
@@ -239,7 +244,7 @@
 					<n-list-item v-for="(warrant, idx) in warrants" :key="idx">
 						<template #prefix>
 							<n-avatar class="home-warrants-avatar">
-								{{ warrant.firstName[0] }}{{ warrant.lastName[0] }}
+								<span class="home-warrants-avatar-text">{{ warrant.firstName[0] }}{{ warrant.lastName[0] }}</span>
 							</n-avatar>
 						</template>					
 
