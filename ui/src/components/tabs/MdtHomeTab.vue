@@ -155,6 +155,13 @@
 		font-size: 2rem;
 	}
 
+	/* Reports Area */
+
+	.home-reports-list
+	{
+		margin: 0;
+	}
+
 	/* Home Grid Media Queries */
 
 	@media only screen and (min-width: 900px)
@@ -218,7 +225,6 @@
 					<n-button type="primary">Search</n-button>
 				</n-input-group>
 			</div>
-
 
 			<template #header-extra>
 				<n-button text>
@@ -307,10 +313,8 @@
 			class="home-grid-reports" 
 			title="Reports" 
 			hoverable 
-			content-style="padding: var(--home-grid-content-padding);"
+			content-style="padding: 0; overflow-y: auto;"
 		>
-			Content
-
 			<template #header-extra>
 				<n-button text>
 					<template #icon>
@@ -320,6 +324,16 @@
 					</template>
 				</n-button>
 			</template>
+
+			<n-scrollbar>
+				<n-list class="home-reports-list home-grid-content-padding">
+					<n-list-item v-for="(report, idx) in reports" :key="idx">
+						<n-thing :title="report.title" :description="`${report.type.charAt(0).toUpperCase()}${report.type.slice(1)} — ${report.timestamp.toLocaleString('en-US')}`">
+							{{ report.summary }}
+						</n-thing>
+					</n-list-item>
+				</n-list>
+			</n-scrollbar>
 		</n-card>
 
 		<n-card 
@@ -372,8 +386,22 @@
 				{ firstName: "Eric", lastName: "Milton", timestamp: new Date(Date.now()), charge: "1st Degree Murder, Resisting Arrest, Robbery" },
 				{ firstName: "Eric", lastName: "Milton", timestamp: new Date(Date.now()), charge: "1st Degree Murder, Resisting Arrest, Robbery" },
 				{ firstName: "Eric", lastName: "Milton", timestamp: new Date(Date.now()), charge: "1st Degree Murder, Resisting Arrest, Robbery" }
-			]
-			return { navBtns, warrants }
+			];
+			const reports: any =
+			[
+				{ title: "Robbery", timestamp: new Date(Date.now()), type: "incident", summary: "Some summary about some report" },
+				{ title: "Robbery", timestamp: new Date(Date.now()), type: "incident", summary: "Some summary about some report" },
+				{ title: "Robbery", timestamp: new Date(Date.now()), type: "arrest", summary: "Some summary about some report" },
+				{ title: "Robbery", timestamp: new Date(Date.now()), type: "incident", summary: "Some summary about some report" },
+				{ title: "Robbery", timestamp: new Date(Date.now()), type: "incident", summary: "Some summary about some report" },
+				{ title: "Robbery", timestamp: new Date(Date.now()), type: "incident", summary: "Some summary about some report" },
+				{ title: "Robbery", timestamp: new Date(Date.now()), type: "arrest", summary: "Some summary about some report" },
+				{ title: "Robbery", timestamp: new Date(Date.now()), type: "arrest", summary: "Some summary about some report" },
+				{ title: "Robbery", timestamp: new Date(Date.now()), type: "citation", summary: "Some summary about some report" },
+				{ title: "Robbery", timestamp: new Date(Date.now()), type: "citation", summary: "Some summary about some report" }
+			];
+
+			return { navBtns, warrants, reports }
 		}
 	});
 </script>
