@@ -176,13 +176,23 @@
 	<mdt-login v-if="!auth"></mdt-login>
 
 	<div class="home-grid">
-		<n-card class="home-grid-nav" title="Explore" hoverable>
+		<n-card
+			class="home-grid-nav" 
+			title="Explore" 
+			hoverable
+			content-style="padding: var(--home-grid-content-padding);"
+		>
 			<div class="home-nav-buttons">
 				<n-button v-for="(nav, idx) in navBtns" :key="idx">{{ nav.label }}</n-button>
 			</div>
 		</n-card>
 
-		<n-card class="home-grid-search" title="Record Search" hoverable>
+		<n-card 
+			class="home-grid-search" 
+			title="Record Search" 
+			hoverable 
+			content-style="padding: var(--home-grid-content-padding);"
+		>
 			<div class="home-search">
 				<n-input-group>
 					<n-input type="text" placeholder="Citizen ID, Name...">
@@ -242,7 +252,12 @@
 
 		</n-card>
 
-		<n-card class="home-grid-user" title="Profile" hoverable>
+		<n-card 
+			class="home-grid-user" 
+			title="Profile" 
+			hoverable 
+			content-style="padding: var(--home-grid-content-padding);"
+		>
 			<div class="home-user-thing">
 				<n-avatar class="hut-avatar">
 					<span class="hut-avatar-text">EM</span>
@@ -258,7 +273,7 @@
 
 			<template #action>
 				<n-space justify="end">
-					<n-button tertiary type="error" >
+					<n-button tertiary type="error">
 						Logout
 					</n-button>
 				</n-space>
@@ -275,7 +290,12 @@
 			</template>
 		</n-card>
 
-		<n-card class="home-grid-reports" title="Reports" hoverable>
+		<n-card 
+			class="home-grid-reports" 
+			title="Reports" 
+			hoverable 
+			content-style="padding: var(--home-grid-content-padding);"
+		>
 			Content
 
 			<template #header-extra>
@@ -289,7 +309,12 @@
 			</template>
 		</n-card>
 
-		<n-card class="home-grid-statistics" title="Statistics" hoverable>
+		<n-card 
+			class="home-grid-statistics" 
+			title="Statistics" 
+			hoverable 
+			content-style="padding: var(--home-grid-content-padding);"
+		>
 			Content
 		</n-card>
 	</div>
