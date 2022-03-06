@@ -3,6 +3,8 @@
 
 	.home-grid
 	{
+		--home-grid-content-padding: 1em;
+
 		display: grid;
 		
 		height: 100%;
@@ -53,6 +55,11 @@
 	.home-grid-nav
 	{
 		grid-area: nav;
+	}
+
+	.home-grid-content-padding
+	{		
+		padding: var(--home-grid-content-padding);
 	}
 
 	/* Search Area */
@@ -123,6 +130,18 @@
 		font-size: 1.5rem;
 	}
 
+	/* Warrant Area */
+
+	.home-warrants-list
+	{
+		margin: 0;
+	}
+
+	.home-warrants-avatar
+	{
+		--n-avatar-size-override: 5rem;
+	}
+
 	/* Home Grid Media Queries */
 
 	@media only screen and (min-width: 900px)
@@ -189,7 +208,12 @@
 			</template>
 		</n-card>
 
-		<n-card class="home-grid-warrants" title="Warrants" hoverable>
+		<n-card 
+			class="home-grid-warrants" 
+			title="Warrants" 
+			hoverable 
+			content-style="padding: 0; overflow-y: auto;"
+		>
 			<template #header-extra>
 				<n-button text>
 					<template #icon>
@@ -200,7 +224,22 @@
 				</n-button>
 			</template>
 
-			Content
+			<n-scrollbar>
+				<n-list class="home-warrants-list home-grid-content-padding">
+					<n-list-item v-for="(warrant, idx) in warrants" :key="idx">
+						<template #prefix>
+							<n-avatar class="home-warrants-avatar">
+								{{ warrant.firstName[0] }}{{ warrant.lastName[0] }}
+							</n-avatar>
+						</template>					
+
+						<n-thing :title="`${warrant.firstName} ${warrant.lastName}`" :description="warrant.timestamp.toLocaleString('en-US')">
+							{{ warrant.charge }}
+						</n-thing>
+					</n-list-item>
+				</n-list>
+			</n-scrollbar>
+
 		</n-card>
 
 		<n-card class="home-grid-user" title="Profile" hoverable>
@@ -283,7 +322,20 @@
 				{ label: "Profile", component: "" },
 				{ label: "Admin", component: "" }
 			];
-			return { navBtns }
+			const warrants: any = 
+			[
+				{ firstName: "Eric", lastName: "Milton", timestamp: new Date(Date.now()), charge: "1st Degree Murder, Resisting Arrest, Robbery, 1st Degree Murder, Resisting Arrest, Robbery" },
+				{ firstName: "Eric", lastName: "Milton", timestamp: new Date(Date.now()), charge: "1st Degree Murder, Resisting Arrest, Robbery" },
+				{ firstName: "Eric", lastName: "Milton", timestamp: new Date(Date.now()), charge: "1st Degree Murder, Resisting Arrest, Robbery" },
+				{ firstName: "Eric", lastName: "Milton", timestamp: new Date(Date.now()), charge: "1st Degree Murder, Resisting Arrest, Robbery" },
+				{ firstName: "Eric", lastName: "Milton", timestamp: new Date(Date.now()), charge: "1st Degree Murder, Resisting Arrest, Robbery" },
+				{ firstName: "Eric", lastName: "Milton", timestamp: new Date(Date.now()), charge: "1st Degree Murder, Resisting Arrest, Robbery" },
+				{ firstName: "Eric", lastName: "Milton", timestamp: new Date(Date.now()), charge: "1st Degree Murder, Resisting Arrest, Robbery" },
+				{ firstName: "Eric", lastName: "Milton", timestamp: new Date(Date.now()), charge: "1st Degree Murder, Resisting Arrest, Robbery" },
+				{ firstName: "Eric", lastName: "Milton", timestamp: new Date(Date.now()), charge: "1st Degree Murder, Resisting Arrest, Robbery" },
+				{ firstName: "Eric", lastName: "Milton", timestamp: new Date(Date.now()), charge: "1st Degree Murder, Resisting Arrest, Robbery" }
+			]
+			return { navBtns, warrants }
 		}
 	});
 </script>
