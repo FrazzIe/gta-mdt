@@ -137,6 +137,9 @@
 		margin: 0;
 	}
 
+	/* 
+		Note: Fixes list prefix extra height
+	*/
 	.home-warrants-list .n-list-item .n-list-item__prefix
 	{
 		line-height: 0;
