@@ -139,7 +139,7 @@
 		}
 	}
 
-	@media screen and (min-width: 1200px)
+	@media screen and (min-width: 1400px)
 	{
 		.home-grid
 		{
