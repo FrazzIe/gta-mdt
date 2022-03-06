@@ -3,7 +3,7 @@
 
 	.home-grid
 	{
-		--home-grid-content-padding: 1em;
+		--home-grid-content-padding: 0px 1em 1em 1em;
 
 		display: grid;
 		
