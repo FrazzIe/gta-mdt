@@ -3,6 +3,7 @@ import { Store } from "vuex"
 
 // interfaces
 import TabNavItem from "./interfaces/TabNavItem";
+import Profile from "./interfaces/Profile";
 
 declare module "@vue/runtime-core"
 {
