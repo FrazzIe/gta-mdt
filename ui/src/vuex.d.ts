@@ -4,6 +4,8 @@ import { Store } from "vuex"
 // interfaces
 import TabNavItem from "./interfaces/TabNavItem";
 import Profile from "./interfaces/Profile";
+import Report from "./interfaces/Report";
+import WarrantReport from "./interfaces/Report/Warrant";
 
 declare module "@vue/runtime-core"
 {
@@ -15,6 +17,11 @@ declare module "@vue/runtime-core"
 		curTabId: string;
 		tabs: TabNavItem[];
 		profile: Profile;
+		latest:
+		{
+			reports: Report[];
+			warrants: WarrantReport[];
+		}
 	}
 
 	// provide typings for `this.$store`

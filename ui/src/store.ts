@@ -4,6 +4,8 @@ import { createStore, useStore as baseUseStore, Store } from "vuex";
 // interfaces
 import TabNavItem from "./interfaces/TabNavItem";
 import Profile from "./interfaces/Profile";
+import Report from "./interfaces/Report";
+import WarrantReport from "./interfaces/Report/Warrant";
 
 // define your typings for the store state
 export interface State
@@ -13,6 +15,11 @@ export interface State
 	curTabId: string;
 	tabs: TabNavItem[];
 	profile: Profile;
+	latest:
+	{
+		reports: Report[];
+		warrants: WarrantReport[];
+	}
 }
 
 // define injection key
@@ -36,6 +43,35 @@ export const store = createStore<State>({
 			avatar: "1",
 			description: "Description",
 			notes: "Notes"
+		},
+		latest:
+		{
+			reports:
+			[
+				{ id: 0, created: 1646678952973, type: "incident", title: "Robbery", summary: "Some summary about some report" },
+				{ id: 0, created: 1646678952973, type: "incident", title: "Robbery", summary: "Some summary about some report" },
+				{ id: 0, created: 1646678952973, type: "arrest",   title: "Robbery", summary: "Some summary about some report" },
+				{ id: 0, created: 1646678952973, type: "incident", title: "Robbery", summary: "Some summary about some report" },
+				{ id: 0, created: 1646678952973, type: "incident", title: "Robbery", summary: "Some summary about some report" },
+				{ id: 0, created: 1646678952973, type: "incident", title: "Robbery", summary: "Some summary about some report" },
+				{ id: 0, created: 1646678952973, type: "arrest",   title: "Robbery", summary: "Some summary about some report" },
+				{ id: 0, created: 1646678952973, type: "arrest",   title: "Robbery", summary: "Some summary about some report" },
+				{ id: 0, created: 1646678952973, type: "citation", title: "Robbery", summary: "Some summary about some report" },
+				{ id: 0, created: 1646678952973, type: "citation", title: "Robbery", summary: "Some summary about some report" }
+			],
+			warrants:
+			[
+				{ id: 0, created: 1646678952973, type: "warrant", title: "Robbery", summary: "1st Degree Murder, Resisting Arrest, Robbery", active: true },
+				{ id: 0, created: 1646678952973, type: "warrant", title: "Robbery", summary: "1st Degree Murder, Resisting Arrest, Robbery", active: true },
+				{ id: 0, created: 1646678952973, type: "warrant", title: "Robbery", summary: "1st Degree Murder, Resisting Arrest, Robbery", active: true },
+				{ id: 0, created: 1646678952973, type: "warrant", title: "Robbery", summary: "1st Degree Murder, Resisting Arrest, Robbery", active: true },
+				{ id: 0, created: 1646678952973, type: "warrant", title: "Robbery", summary: "1st Degree Murder, Resisting Arrest, Robbery", active: true },
+				{ id: 0, created: 1646678952973, type: "warrant", title: "Robbery", summary: "1st Degree Murder, Resisting Arrest, Robbery", active: true },
+				{ id: 0, created: 1646678952973, type: "warrant", title: "Robbery", summary: "1st Degree Murder, Resisting Arrest, Robbery", active: true },
+				{ id: 0, created: 1646678952973, type: "warrant", title: "Robbery", summary: "1st Degree Murder, Resisting Arrest, Robbery", active: true },
+				{ id: 0, created: 1646678952973, type: "warrant", title: "Robbery", summary: "1st Degree Murder, Resisting Arrest, Robbery", active: true },
+				{ id: 0, created: 1646678952973, type: "warrant", title: "Robbery", summary: "1st Degree Murder, Resisting Arrest, Robbery", active: true }				
+			]
 		}
 	},
 	mutations:
