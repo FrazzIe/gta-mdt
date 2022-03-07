@@ -3,6 +3,7 @@ import { createStore, useStore as baseUseStore, Store } from "vuex";
 
 // interfaces
 import TabNavItem from "./interfaces/TabNavItem";
+import Profile from "./interfaces/Profile";
 
 // define your typings for the store state
 export interface State
@@ -11,6 +12,7 @@ export interface State
 	lastTabId: number;
 	curTabId: string;
 	tabs: TabNavItem[];
+	profile: Profile;
 }
 
 // define injection key
@@ -19,13 +21,22 @@ export const key: InjectionKey<Store<State>> = Symbol();
 export const store = createStore<State>({
 	state:
 	{
-		auth: false,
+		auth: true,
 		lastTabId: 0,
 		curTabId: "tab-0",
 		tabs:
 		[
 			{ id: "tab-0", label: "Home", component: "mdt-home-tab", closable: false }
-		]
+		],
+		profile:
+		{
+			id: 0,
+			username: "Username",
+			role: "Role",
+			avatar: "",
+			description: "Description",
+			notes: "Notes"
+		}
 	},
 	mutations:
 	{

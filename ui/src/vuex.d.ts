@@ -11,7 +11,9 @@ declare module "@vue/runtime-core"
 	{
 		auth: boolean;
 		lastTabId: number;
+		curTabId: string;
 		tabs: TabNavItem[];
+		profile: Profile;
 	}
 
 	// provide typings for `this.$store`
