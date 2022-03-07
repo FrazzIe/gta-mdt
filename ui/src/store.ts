@@ -7,6 +7,8 @@ import Profile from "./interfaces/Profile";
 import Report from "./interfaces/Report";
 import WarrantReport from "./interfaces/Report/Warrant";
 
+const CUSTOM_TAB_LIMIT = 8;
+
 // define your typings for the store state
 export interface State
 {
@@ -127,6 +129,18 @@ export const store = createStore<State>({
 		updateTab(state: State, payload: { id: string })
 		{
 			state.curTabId = payload.id;
+		}
+	},
+	getters:
+	{
+		/**
+		 * Check if a tab can be opened
+		 * @param state application state
+		 * @returns Whether a new tab can be opened or not
+		 */
+		canOpenTab(state: State): boolean
+		{
+			return !state.auth || state.tabs.length >= CUSTOM_TAB_LIMIT;
 		}
 	}
 });
