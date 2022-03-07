@@ -278,14 +278,17 @@
 			content-style="padding: var(--content-padding);"
 		>
 			<div class="profile-container">
-				<n-avatar class="profile-avatar">
-					<span class="profile-avatar-text">EM</span>
+				<n-avatar class="profile-avatar" :src="profile.avatar" @error="onProfileAvatarError" v-if="profileAvatarLoadFailed"></n-avatar>				
+				<n-avatar class="profile-avatar" v-else>
+					<n-icon>
+						<i-tabler-user/>
+					</n-icon>
 				</n-avatar>
 
 				<div class="profile-content">
-					<n-text class="profile-username">Username</n-text>
+					<n-text class="profile-username">{{ profile.username }}</n-text>
 					<n-space>
-						<n-tag type="info">Role</n-tag>
+						<n-tag type="info">{{ profile.role }}</n-tag>
 					</n-space>					
 				</div>
 			</div>
@@ -348,7 +351,7 @@
 </template>
 
 <script lang="ts">
-	import { defineComponent } from "vue";
+	import { defineComponent, ref } from "vue";
 	import { mapState } from "vuex";
 
 	// components
@@ -361,10 +364,19 @@
 		},
 		computed:
 		{
-			...mapState(["auth"])
+			...mapState(["auth", "profile"])
+		},
+		methods:
+		{
+			onProfileAvatarError()
+			{
+				this.profileAvatarLoadFailed = true;
+			}
 		},
 		setup()
 		{
+			let profileAvatarLoadFailed = ref(false);
+
 			const navBtns: any =
 			[
 				{ label: "Warrants", component: "" },
@@ -401,7 +413,12 @@
 				{ title: "Robbery", timestamp: new Date(Date.now()), type: "citation", summary: "Some summary about some report" }
 			];
 
-			return { navBtns, warrants, reports }
+			return { 
+				profileAvatarLoadFailed,
+				navBtns,
+				warrants,
+				reports
+			}
 		}
 	});
 </script>

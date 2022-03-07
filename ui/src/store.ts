@@ -33,7 +33,7 @@ export const store = createStore<State>({
 			id: 0,
 			username: "Username",
 			role: "Role",
-			avatar: "",
+			avatar: "1",
 			description: "Description",
 			notes: "Notes"
 		}
