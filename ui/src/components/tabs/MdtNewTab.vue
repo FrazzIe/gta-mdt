@@ -88,16 +88,18 @@
 
 		
 		<div class="recent-container">
-			<div style="padding: var(--n-label-padding)">Recent Tabs</div>
+			<div>Recent Tabs</div>
 			<div class="recent-tabs">
-				<n-card v-for="(tab, idx) in recentTabs" :key="idx" size="small">
-					<div class="recent-tab">
-						<n-icon size="4rem">
-							<component :is="`icon-${tab.icon}`"/>
-						</n-icon>
+				<n-card v-for="(tab, idx) in recentTabs" :key="idx" size="small" hoverable>
+					<n-button text :block="true">
+						<div class="recent-tab">
+							<n-icon size="4rem">
+								<component :is="`icon-${tab.icon}`"/>
+							</n-icon>
 
-						<span>{{ tab.title }}</span>
-					</div>
+							<span>{{ tab.title }}</span>
+						</div>
+					</n-button>				
 				</n-card>
 			</div>
 		</div>
