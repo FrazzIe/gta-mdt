@@ -255,15 +255,15 @@
 
 			<n-scrollbar>
 				<n-list class="warrant-list pad-content">
-					<n-list-item v-for="(warrant, idx) in warrants" :key="idx">
+					<n-list-item v-for="(warrant, idx) in latestWarrants" :key="idx">
 						<template #prefix>
 							<n-avatar class="warrant-avatar">
-								<span class="warrant-avatar-text">{{ warrant.firstName[0] }}{{ warrant.lastName[0] }}</span>
+								<span class="warrant-avatar-text">FL</span>
 							</n-avatar>
 						</template>					
 
-						<n-thing :title="`${warrant.firstName} ${warrant.lastName}`" :description="warrant.timestamp.toLocaleString('en-US')">
-							{{ warrant.charge }}
+						<n-thing title="First Last" :description="formatTimestamp(warrant.created)">
+							{{ warrant.summary }}
 						</n-thing>
 					</n-list-item>
 				</n-list>
@@ -330,8 +330,8 @@
 
 			<n-scrollbar>
 				<n-list class="report-list pad-content">
-					<n-list-item v-for="(report, idx) in reports" :key="idx">
-						<n-thing :title="report.title" :description="`${report.type.charAt(0).toUpperCase()}${report.type.slice(1)} — ${report.timestamp.toLocaleString('en-US')}`">
+					<n-list-item v-for="(report, idx) in latestReports" :key="idx">
+						<n-thing :title="report.title" :description="reportSubtitle(report.type, report.created)">
 							{{ report.summary }}
 						</n-thing>
 					</n-list-item>
@@ -352,7 +352,7 @@
 
 <script lang="ts">
 	import { defineComponent, ref } from "vue";
-	import { mapState } from "vuex";
+	import { useStore } from "../../store";
 
 	// components
 	import MdtLogin from "../MdtLogin.vue";
@@ -364,17 +364,27 @@
 		},
 		computed:
 		{
-			...mapState(["auth", "profile"])
+			
 		},
 		methods:
 		{
 			onProfileAvatarError()
 			{
 				this.profileAvatarLoadFailed = true;
+			},
+			formatTimestamp(num: number): string
+			{
+				return new Date(num).toLocaleString("en-US");
+			},
+			reportSubtitle(type: string, num: number)
+			{
+				return `${type.charAt(0).toUpperCase()}${type.slice(1)} — ${this.formatTimestamp(num)}`;
 			}
 		},
 		setup()
 		{
+			const store = useStore();
+
 			let profileAvatarLoadFailed = ref(false);
 
 			const navBtns: any =
@@ -386,38 +396,14 @@
 				{ label: "Profile", component: "" },
 				{ label: "Admin", component: "" }
 			];
-			const warrants: any = 
-			[
-				{ firstName: "Eric", lastName: "Milton", timestamp: new Date(Date.now()), charge: "1st Degree Murder, Resisting Arrest, Robbery, 1st Degree Murder, Resisting Arrest, Robbery" },
-				{ firstName: "Eric", lastName: "Milton", timestamp: new Date(Date.now()), charge: "1st Degree Murder, Resisting Arrest, Robbery" },
-				{ firstName: "Eric", lastName: "Milton", timestamp: new Date(Date.now()), charge: "1st Degree Murder, Resisting Arrest, Robbery" },
-				{ firstName: "Eric", lastName: "Milton", timestamp: new Date(Date.now()), charge: "1st Degree Murder, Resisting Arrest, Robbery" },
-				{ firstName: "Eric", lastName: "Milton", timestamp: new Date(Date.now()), charge: "1st Degree Murder, Resisting Arrest, Robbery" },
-				{ firstName: "Eric", lastName: "Milton", timestamp: new Date(Date.now()), charge: "1st Degree Murder, Resisting Arrest, Robbery" },
-				{ firstName: "Eric", lastName: "Milton", timestamp: new Date(Date.now()), charge: "1st Degree Murder, Resisting Arrest, Robbery" },
-				{ firstName: "Eric", lastName: "Milton", timestamp: new Date(Date.now()), charge: "1st Degree Murder, Resisting Arrest, Robbery" },
-				{ firstName: "Eric", lastName: "Milton", timestamp: new Date(Date.now()), charge: "1st Degree Murder, Resisting Arrest, Robbery" },
-				{ firstName: "Eric", lastName: "Milton", timestamp: new Date(Date.now()), charge: "1st Degree Murder, Resisting Arrest, Robbery" }
-			];
-			const reports: any =
-			[
-				{ title: "Robbery", timestamp: new Date(Date.now()), type: "incident", summary: "Some summary about some report" },
-				{ title: "Robbery", timestamp: new Date(Date.now()), type: "incident", summary: "Some summary about some report" },
-				{ title: "Robbery", timestamp: new Date(Date.now()), type: "arrest", summary: "Some summary about some report" },
-				{ title: "Robbery", timestamp: new Date(Date.now()), type: "incident", summary: "Some summary about some report" },
-				{ title: "Robbery", timestamp: new Date(Date.now()), type: "incident", summary: "Some summary about some report" },
-				{ title: "Robbery", timestamp: new Date(Date.now()), type: "incident", summary: "Some summary about some report" },
-				{ title: "Robbery", timestamp: new Date(Date.now()), type: "arrest", summary: "Some summary about some report" },
-				{ title: "Robbery", timestamp: new Date(Date.now()), type: "arrest", summary: "Some summary about some report" },
-				{ title: "Robbery", timestamp: new Date(Date.now()), type: "citation", summary: "Some summary about some report" },
-				{ title: "Robbery", timestamp: new Date(Date.now()), type: "citation", summary: "Some summary about some report" }
-			];
 
 			return { 
 				profileAvatarLoadFailed,
 				navBtns,
-				warrants,
-				reports
+				auth: store.state.auth,
+				profile: store.state.profile,
+				latestReports: store.state.latest.reports,
+				latestWarrants: store.state.latest.warrants
 			}
 		}
 	});
