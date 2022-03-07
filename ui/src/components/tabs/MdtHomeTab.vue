@@ -1,9 +1,9 @@
 <style>
-	/* Home Grid */
+	/* Main */
 
-	.home-grid
+	.home-container
 	{
-		--home-grid-content-padding: 0px 1em 1em 1em;
+		--content-padding: 0px 1em 1em 1em;
 
 		display: grid;
 		
@@ -12,7 +12,7 @@
 		grid-template-areas: 
 			" search     "
 			" nav        "
-			" user       "
+			" profile    "
 			" warrants   "
 			" reports    "
 			" statistics ";
@@ -25,46 +25,21 @@
 		box-sizing: border-box;
 	}
 
-	/* Home Grid Areas */
-
-	.home-grid-reports
-	{
-		grid-area: reports;
-	}
-
-	.home-grid-warrants
-	{
-		grid-area: warrants;
-	}
-
-	.home-grid-statistics
-	{
-		grid-area: statistics;
-	}
-
-	.home-grid-search
-	{
-		grid-area: search;
-	}
-
-	.home-grid-user
-	{
-		grid-area: user;
-	}
-
-	.home-grid-nav
-	{
-		grid-area: nav;
-	}
-
-	.home-grid-content-padding
+	.home-container .pad-content
 	{		
-		padding: var(--home-grid-content-padding);
+		padding: var(--content-padding);
 	}
+
+	/* Content Areas */
 
 	/* Search Area */
 
-	.home-search
+	.home-container .search-area
+	{
+		grid-area: search;
+	}	
+
+	.home-container .search-area .search-content
 	{
 		display: flex;
 
@@ -76,7 +51,12 @@
 
 	/* Button Navigation Area */
 
-	.home-nav-buttons
+	.home-container .nav-area
+	{
+		grid-area: nav;
+	}	
+
+	.home-container .nav-area .nav-content
 	{
 		--user-nav-buttons-gap: 0.5em;
 
@@ -90,7 +70,7 @@
 		gap: var(--user-nav-buttons-gap);
 	}
 
-	.home-nav-buttons > button
+	.home-container .nav-area .nav-content > button
 	{
 		flex-basis: calc(100% * (1/4) - var(--user-nav-buttons-gap));
 		flex-grow: 1;
@@ -98,24 +78,29 @@
 
 	/* Profile Area */
 
-	.home-user-thing
+	.home-container .profile-area
+	{
+		grid-area: profile;
+	}	
+
+	.home-container .profile-area .profile-container
 	{
 		display: flex;
 
 		gap: 1em;
 	}
 
-	.home-user-thing .hut-avatar
+	.home-container .profile-area .profile-avatar
 	{
 		--n-avatar-size-override: 5rem;
 	}
 
-	.home-user-thing .hut-avatar-text
+	.home-container .profile-area .profile-avatar-text
 	{
 		font-size: 2rem;
 	}
 
-	.home-user-thing .hut-content
+	.home-container .profile-area .profile-content
 	{
 		display: flex;
 
@@ -125,14 +110,19 @@
 		justify-content: center;
 	}
 
-	.home-user-thing .hut-content .hut-username
+	.home-container .profile-area .profile-username
 	{
 		font-size: 1.5rem;
 	}
 
 	/* Warrant Area */
 
-	.home-warrants-list
+	.home-container .warrant-area
+	{
+		grid-area: warrants;
+	}	
+
+	.home-container .warrant-area .warrant-list
 	{
 		margin: 0;
 	}
@@ -140,33 +130,43 @@
 	/* 
 		Note: Fixes list prefix extra height
 	*/
-	.home-warrants-list .n-list-item .n-list-item__prefix
+	.home-container .warrant-area .warrant-list .n-list-item .n-list-item__prefix
 	{
 		line-height: 0;
 	}
 
-	.home-warrants-avatar
+	.home-container .warrant-area .warrant-list .warrant-avatar
 	{
 		--n-avatar-size-override: 5rem;		
 	}
 
-	.home-warrants-avatar-text
+	.home-container .warrant-area .warrant-list .warrant-avatar-text
 	{
 		font-size: 2rem;
 	}
 
 	/* Reports Area */
 
-	.home-reports-list
+	.home-container .report-area
+	{
+		grid-area: reports;
+	}
+
+	.home-container .report-area .report-list
 	{
 		margin: 0;
 	}
 
-	/* Home Grid Media Queries */
+	.home-container .statistics-area
+	{
+		grid-area: statistics;
+	}
+
+	/* Media queries */
 
 	@media only screen and (min-width: 900px)
 	{
-		.home-grid
+		.home-container
 		{
 			grid-template-columns: 1fr 1fr;
 			grid-template-rows: 0.5fr 1.5fr 1fr 1fr;
@@ -174,19 +174,19 @@
 				" nav        search   "
 				" warrants   warrants "
 				" reports    reports  "
-				" statistics user     ";
+				" statistics profile  ";
 		}
 	}
 
 	@media screen and (min-width: 1400px)
 	{
-		.home-grid
+		.home-container
 		{
 			grid-template-columns: 1fr 1.5fr 1fr;
 			grid-template-rows: 0.5fr 1fr 1fr;
 			grid-template-areas: 
 				" nav      warrants search     "
-				" reports  warrants user       "
+				" reports  warrants profile    "
 				" reports  warrants statistics ";
 		}
 	}
@@ -195,25 +195,25 @@
 <template>
 	<mdt-login v-if="!auth"></mdt-login>
 
-	<div class="home-grid">
+	<div class="home-container">
 		<n-card
-			class="home-grid-nav" 
+			class="nav-area" 
 			title="Explore" 
 			hoverable
-			content-style="padding: var(--home-grid-content-padding);"
+			content-style="padding: var(--content-padding);"
 		>
-			<div class="home-nav-buttons">
+			<div class="nav-content">
 				<n-button v-for="(nav, idx) in navBtns" :key="idx">{{ nav.label }}</n-button>
 			</div>
 		</n-card>
 
 		<n-card 
-			class="home-grid-search" 
+			class="search-area" 
 			title="Record Search" 
 			hoverable 
-			content-style="padding: var(--home-grid-content-padding);"
+			content-style="padding: var(--content-padding);"
 		>
-			<div class="home-search">
+			<div class="search-content">
 				<n-input-group>
 					<n-input type="text" placeholder="Citizen ID, Name...">
 						<template #prefix>
@@ -238,7 +238,7 @@
 		</n-card>
 
 		<n-card 
-			class="home-grid-warrants" 
+			class="warrant-area" 
 			title="Warrants" 
 			hoverable 
 			content-style="padding: 0; overflow-y: auto;"
@@ -254,11 +254,11 @@
 			</template>
 
 			<n-scrollbar>
-				<n-list class="home-warrants-list home-grid-content-padding">
+				<n-list class="warrant-list pad-content">
 					<n-list-item v-for="(warrant, idx) in warrants" :key="idx">
 						<template #prefix>
-							<n-avatar class="home-warrants-avatar">
-								<span class="home-warrants-avatar-text">{{ warrant.firstName[0] }}{{ warrant.lastName[0] }}</span>
+							<n-avatar class="warrant-avatar">
+								<span class="warrant-avatar-text">{{ warrant.firstName[0] }}{{ warrant.lastName[0] }}</span>
 							</n-avatar>
 						</template>					
 
@@ -272,18 +272,18 @@
 		</n-card>
 
 		<n-card 
-			class="home-grid-user" 
+			class="profile-area" 
 			title="Profile" 
 			hoverable 
-			content-style="padding: var(--home-grid-content-padding);"
+			content-style="padding: var(--content-padding);"
 		>
-			<div class="home-user-thing">
-				<n-avatar class="hut-avatar">
-					<span class="hut-avatar-text">EM</span>
+			<div class="profile-container">
+				<n-avatar class="profile-avatar">
+					<span class="profile-avatar-text">EM</span>
 				</n-avatar>
 
-				<div class="hut-content">
-					<n-text class="hut-username">Username</n-text>
+				<div class="profile-content">
+					<n-text class="profile-username">Username</n-text>
 					<n-space>
 						<n-tag type="info">Role</n-tag>
 					</n-space>					
@@ -310,7 +310,7 @@
 		</n-card>
 
 		<n-card 
-			class="home-grid-reports" 
+			class="report-area" 
 			title="Reports" 
 			hoverable 
 			content-style="padding: 0; overflow-y: auto;"
@@ -326,7 +326,7 @@
 			</template>
 
 			<n-scrollbar>
-				<n-list class="home-reports-list home-grid-content-padding">
+				<n-list class="report-list pad-content">
 					<n-list-item v-for="(report, idx) in reports" :key="idx">
 						<n-thing :title="report.title" :description="`${report.type.charAt(0).toUpperCase()}${report.type.slice(1)} — ${report.timestamp.toLocaleString('en-US')}`">
 							{{ report.summary }}
@@ -337,10 +337,10 @@
 		</n-card>
 
 		<n-card 
-			class="home-grid-statistics" 
+			class="statistics-area" 
 			title="Statistics" 
 			hoverable 
-			content-style="padding: var(--home-grid-content-padding);"
+			content-style="padding: var(--content-padding);"
 		>
 			Content
 		</n-card>
