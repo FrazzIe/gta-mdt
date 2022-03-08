@@ -227,7 +227,7 @@
 			</div>
 
 			<template #header-extra>
-				<n-button text>
+				<n-button text @click="openSearchTab">
 					<template #icon>
 						<n-icon>
 							<i-tabler-external-link/>
@@ -354,6 +354,9 @@
 	import { defineComponent, ref } from "vue";
 	import { useStore } from "../../store";
 
+	// interfaces
+	import TabOpenOptions from "../../interfaces/tabs/TabOpenOptions";
+
 	// components
 	import MdtLogin from "../MdtLogin.vue";
 
@@ -383,6 +386,16 @@
 			reportSubtitle(type: string, num: number)
 			{
 				return `${type.charAt(0).toUpperCase()}${type.slice(1)} — ${this.formatTimestamp(num)}`;
+			},
+			openSearchTab()
+			{
+				const options: TabOpenOptions = 
+				{
+					label: "Search",
+					component: "mdt-search-tab"
+				};
+
+				this.$store.commit("openTab", options);
 			}
 		},
 		setup()
