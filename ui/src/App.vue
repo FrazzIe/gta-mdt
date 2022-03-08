@@ -92,6 +92,7 @@
 	// components
 	import MdtHomeTab from "./components/tabs/MdtHomeTab.vue";
 	import MdtNewTab from "./components/tabs/MdtNewTab.vue";
+	import MdtSearchTab from "./components/tabs/MdtSearchTab.vue";
 	// TODO
 
 	// theme
@@ -101,7 +102,8 @@
 		components:
 		{
 			MdtHomeTab,
-			MdtNewTab
+			MdtNewTab,
+			MdtSearchTab
 		},
 		computed:
 		{
