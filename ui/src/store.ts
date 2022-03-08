@@ -140,7 +140,7 @@ export const store = createStore<State>({
 		 */
 		canOpenTab(state: State): boolean
 		{
-			return !state.auth || state.tabs.length >= CUSTOM_TAB_LIMIT;
+			return state.auth && state.tabs.length <= CUSTOM_TAB_LIMIT;
 		}
 	}
 });
