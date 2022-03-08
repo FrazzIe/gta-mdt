@@ -87,7 +87,7 @@ export const store = createStore<State>({
 		openTab(state: State, payload: TabOpenOptions)
 		{
 			// check if a tab can be opened
-			if (!state.auth || state.tabs.length >= CUSTOM_TAB_LIMIT)
+			if (!state.auth || state.tabs.length > CUSTOM_TAB_LIMIT)
 			{
 				return;
 			}
