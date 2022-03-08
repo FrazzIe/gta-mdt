@@ -2,7 +2,8 @@ import { InjectionKey } from "vue";
 import { createStore, useStore as baseUseStore, Store } from "vuex";
 
 // interfaces
-import TabNavItem from "./interfaces/TabNavItem";
+import TabNavItem from "./interfaces/tabs/TabNavItem";
+import TabOptions from "./interfaces/tabs/TabOptions";
 import Profile from "./interfaces/Profile";
 import Report from "./interfaces/report";
 import WarrantReport from "./interfaces/report/Warrant";
@@ -100,7 +101,7 @@ export const store = createStore<State>({
 		 * Close tab
 		 * @param state application state
 		 */
-		closeTab(state: State, payload: { id: string })
+		closeTab(state: State, payload: TabOptions)
 		{
 			// loop through each tab starting from the end
 			for (let i = state.tabs.length - 1; i > 0; i--)
@@ -125,7 +126,7 @@ export const store = createStore<State>({
 		 * Update tab
 		 * @param state application state
 		 */
-		updateTab(state: State, payload: { id: string })
+		updateTab(state: State, payload: TabOptions)
 		{
 			state.curTabId = payload.id;
 		}
