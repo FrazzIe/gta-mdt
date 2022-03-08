@@ -105,7 +105,6 @@ export const store = createStore<State>({
 			// loop through each tab starting from the end
 			for (let i = state.tabs.length - 1; i > 0; i--)
 			{
-				console.log(i);
 				// check for a match
 				if (state.tabs[i].id == payload.id)
 				{
