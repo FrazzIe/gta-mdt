@@ -4,6 +4,7 @@ import { createStore, useStore as baseUseStore, Store } from "vuex";
 // interfaces
 import TabNavItem from "./interfaces/tabs/TabNavItem";
 import TabOptions from "./interfaces/tabs/TabOptions";
+import TabOpenOptions from "./interfaces/tabs/TabOpenOptions";
 import Profile from "./interfaces/Profile";
 import Report from "./interfaces/report";
 import WarrantReport from "./interfaces/report/Warrant";
@@ -92,6 +93,24 @@ export const store = createStore<State>({
 				id: `tab-${id}`,
 				label: "New Tab",
 				component: "mdt-new-tab",
+				closable: true
+			}
+
+			state.curTabId = `tab-${id}`;
+		},
+		/**
+		 * Open a new specific tab
+		 * @param state application state
+		 */
+		openTab(state: State, payload: TabOpenOptions)
+		{
+			const id = ++state.lastTabId;
+
+			state.tabs[state.tabs.length] =
+			{
+				id: `tab-${id}`,
+				label: payload.label,
+				component: payload.component,
 				closable: true
 			}
 
