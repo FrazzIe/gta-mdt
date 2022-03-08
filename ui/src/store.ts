@@ -81,30 +81,6 @@ export const store = createStore<State>({
 	mutations:
 	{
 		/**
-		 * Add new tab
-		 * @param state application state
-		 */
-		newTab(state: State)
-		{
-			// check if a tab can be created
-			if (!state.auth || state.tabs.length >= CUSTOM_TAB_LIMIT)
-			{
-				return;
-			}
-
-			const id = ++state.lastTabId;
-
-			state.tabs[state.tabs.length] =
-			{
-				id: `tab-${id}`,
-				label: "New Tab",
-				component: "mdt-new-tab",
-				closable: true
-			}
-
-			state.curTabId = `tab-${id}`;
-		},
-		/**
 		 * Open a new specific tab
 		 * @param state application state
 		 */

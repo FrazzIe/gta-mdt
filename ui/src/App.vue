@@ -128,7 +128,7 @@
 			 */
 			onNewTab()
 			{
-				this.$store.commit("newTab");
+				this.$store.commit("openTab", { label: "New Tab", component: "mdt-new-tab" });
 			},
 			/**
 			 * Close tab
