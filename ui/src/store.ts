@@ -3,6 +3,7 @@ import { createStore, useStore as baseUseStore, Store } from "vuex";
 
 // interfaces
 import TabNavItem from "./interfaces/tabs/TabNavItem";
+import TabNavData from "./interfaces/tabs/TabNavData";
 import TabOptions from "./interfaces/tabs/TabOptions";
 import TabOpenOptions from "./interfaces/tabs/TabOpenOptions";
 import Profile from "./interfaces/Profile";
@@ -18,6 +19,7 @@ export interface State
 	lastTabId: number;
 	curTabId: string;
 	tabs: TabNavItem[];
+	tabsData: TabNavData;
 	profile: Profile;
 	latest:
 	{
@@ -39,6 +41,10 @@ export const store = createStore<State>({
 		[
 			{ id: "tab-0", label: "Home", component: "mdt-home-tab", closable: false }
 		],
+		tabsData: 
+		{
+			"tab-0": {}
+		},
 		profile:
 		{
 			id: 0,
@@ -92,17 +98,19 @@ export const store = createStore<State>({
 				return;
 			}
 
-			const id = ++state.lastTabId;
+			const id = `tab-${++state.lastTabId}`;
 
 			state.tabs[state.tabs.length] =
 			{
-				id: `tab-${id}`,
+				id,
 				label: payload.label,
 				component: payload.component,
 				closable: true
 			}
 
-			state.curTabId = `tab-${id}`;
+			state.tabsData[id] = payload.data ?? {};
+
+			state.curTabId = id;
 		},
 		/**
 		 * Close tab
