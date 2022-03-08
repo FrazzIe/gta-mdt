@@ -362,9 +362,13 @@
 		{
 			MdtLogin
 		},
-		computed:
+		props:
 		{
-			
+			tabId:
+			{
+				type: String,
+				required: true
+			}
 		},
 		methods:
 		{

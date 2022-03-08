@@ -123,6 +123,14 @@
 			IconFileText,
 			IconSearch
 		},
+		props:
+		{
+			tabId:
+			{
+				type: String,
+				required: true
+			}
+		},
 		setup()
 		{
 			const recentTabs =
