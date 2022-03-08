@@ -4,8 +4,8 @@ import { createStore, useStore as baseUseStore, Store } from "vuex";
 // interfaces
 import TabNavItem from "./interfaces/TabNavItem";
 import Profile from "./interfaces/Profile";
-import Report from "./interfaces/Report";
-import WarrantReport from "./interfaces/Report/Warrant";
+import Report from "./interfaces/report";
+import WarrantReport from "./interfaces/report/Warrant";
 
 const CUSTOM_TAB_LIMIT = 8;
 

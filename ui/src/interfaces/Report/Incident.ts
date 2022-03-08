@@ -1,4 +1,4 @@
-import Report from "./";
+import Report from ".";
 
 export default interface Incident extends Report
 {

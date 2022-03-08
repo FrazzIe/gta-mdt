@@ -4,8 +4,8 @@ import { Store } from "vuex"
 // interfaces
 import TabNavItem from "./interfaces/TabNavItem";
 import Profile from "./interfaces/Profile";
-import Report from "./interfaces/Report";
-import WarrantReport from "./interfaces/Report/Warrant";
+import Report from "./interfaces/report";
+import WarrantReport from "./interfaces/report/Warrant";
 
 declare module "@vue/runtime-core"
 {
