@@ -96,8 +96,6 @@
 
 	// theme
 	import { darkTheme } from "naive-ui";
-	
-	const CUSTOM_TAB_LIMIT = 8;
 
 	export default defineComponent({
 		components:
@@ -112,7 +110,7 @@
 				const addable = { disabled: true };
 
 				// auto disable if not authenticated or over limit
-				if (!this.$store.state.auth || this.$store.state.tabs.length >= CUSTOM_TAB_LIMIT)
+				if (!this.$store.getters.canOpenTab)
 				{
 					return addable;
 				}
@@ -121,7 +119,7 @@
 
 				return addable;
 			},
-			...mapState(["auth", "tabs", "curTabId"])
+			...mapState(["tabs", "curTabId"])
 		},
 		methods:
 		{
