@@ -45,6 +45,18 @@
 		font-size: 2rem;
 	}
 
+	.search-results .search-content
+	{
+		display: flex;
+
+		flex-direction: column;
+	}
+
+	.search-results .search-content .header
+	{
+		margin: 0;
+	}
+
 	.search-pagination
 	{
 		display: flex;
@@ -82,9 +94,11 @@
 						</n-avatar>
 					</template>					
 
-					<n-thing title="First Last" description="ss">
-						ss
-					</n-thing>
+					<div class="search-content">
+						<n-h5 class="header">First Last</n-h5>
+						<div>ID: 101010101010</div>
+						<div>Male — 15/07/1999</div>
+					</div>
 				</n-list-item>
 			</n-list>
 		</n-scrollbar>
