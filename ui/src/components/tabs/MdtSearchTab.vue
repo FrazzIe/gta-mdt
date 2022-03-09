@@ -9,22 +9,24 @@
 
 		box-sizing: border-box;
 
-		padding: 1.5em 0px 1.5em 0px;
+		padding: 1.5rem 0px 1.5rem 0px;
 	}
 
 	.search-input
 	{
-		padding: 1.5em 1.5em 0px 1.5em;
+		padding: 0px 1.5rem 0px 1.5rem;
 	}
 
 	.search-label
 	{
-		padding: 0px 1.5em 0px 1.5em;
+		padding: 0px 1.5rem 0px 1.5rem;
+		margin: 0;
 	}
 
 	.search-results
 	{
-		padding: 0px 1.5em 0px 1.5em;
+		padding: 0px 1.5rem 0px 1.5rem;
+		margin: 0;
 	}
 
 	/* 
@@ -64,7 +66,7 @@
 		align-items: center;
 		justify-content: center;
 
-		padding: 1.5em 1.5em 0px 1.5em;
+		padding: 1.5rem 1.5rem 0px 1.5rem;
 	}
 </style>
 
@@ -83,7 +85,7 @@
 			</n-input-group>
 		</n-form-item>
 
-		<span class="search-label">Search results</span>
+		<h3 class="search-label">Search results</h3>
 
 		<n-scrollbar>
 			<n-list class="search-results">
