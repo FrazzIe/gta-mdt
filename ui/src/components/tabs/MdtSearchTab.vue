@@ -1,5 +1,5 @@
 <style>
-	.search-container
+	.search-tab
 	{
 		display: flex;
 
@@ -12,18 +12,18 @@
 		padding: var(--app-tabs-content-padding-tb);
 	}
 
-	.search-input
+	.search-tab--input
 	{
 		padding: var(--app-tabs-content-padding-lr);
 	}
 
-	.search-label
+	.search-tab--results-label
 	{
 		padding: var(--app-tabs-content-padding-lr);
 		margin: 0;
 	}
 
-	.search-results
+	.search-tab--results
 	{
 		padding: var(--app-tabs-content-padding-lr);
 		margin: 0;
@@ -32,34 +32,34 @@
 	/* 
 		Note: Fixes list prefix extra height
 	*/
-	.search-results .n-list-item .n-list-item__prefix
+	.search-tab--results .n-list-item .n-list-item__prefix
 	{
 		line-height: 0;
 	}
 
-	.search-results .search-avatar
+	.search-tab--results-item .avatar
 	{
 		--n-avatar-size-override: 5rem;		
 	}
 
-	.search-results .search-avatar-text
+	.search-tab--results-item .avatar-text
 	{
 		font-size: 2rem;
 	}
 
-	.search-results .search-content
+	.search-tab--results-item .content
 	{
 		display: flex;
 
 		flex-direction: column;
 	}
 
-	.search-results .search-content .header
+	.search-tab--results-item .content .header
 	{
 		margin: 0;
 	}
 
-	.search-pagination
+	.search-tab--pagination
 	{
 		display: flex;
 
@@ -71,8 +71,8 @@
 </style>
 
 <template>
-	<div class="search-container">
-		<n-form-item class="search-input" label="Record Search">
+	<div class="search-tab">
+		<n-form-item class="search-tab--input" label="Record Search">
 			<n-input-group>
 				<n-input type="text" placeholder="Citizen ID, Name..." size="large">
 					<template #prefix>
@@ -85,18 +85,18 @@
 			</n-input-group>
 		</n-form-item>
 
-		<h3 class="search-label">Search results</h3>
+		<h3 class="search-tab--results-label">Search results</h3>
 
 		<n-scrollbar>
-			<n-list class="search-results">
-				<n-list-item v-for="i in 20" :key="i">
+			<n-list class="search-tab--results">
+				<n-list-item class="search-tab--results-item" v-for="i in 20" :key="i">
 					<template #prefix>
-						<n-avatar class="search-avatar">
-							<span class="search-avatar-text">FL</span>
+						<n-avatar class="avatar">
+							<span class="avatar-text">FL</span>
 						</n-avatar>
 					</template>					
 
-					<div class="search-content">
+					<div class="content">
 						<n-h5 class="header">First Last</n-h5>
 						<div>ID: 101010101010</div>
 						<div>Male — 15/07/1999</div>
@@ -105,7 +105,7 @@
 			</n-list>
 		</n-scrollbar>
 
-		<div class="search-pagination">
+		<div class="search-tab--pagination">
 			<n-pagination v-model:page="page" :page-count="100" />
 		</div>		
 	</div>

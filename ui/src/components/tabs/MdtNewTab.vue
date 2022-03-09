@@ -1,5 +1,5 @@
 <style>
-	.new-tab-container
+	.new-tab
 	{
 		position: absolute;
 		display: flex;
@@ -16,14 +16,14 @@
 		gap: 1rem;
 	}
 
-	.new-tab-container .logo
+	.new-tab--logo
 	{
 		display: flex;
 
 		justify-content: center;
 	}
 
-	.new-tab-container .recent-container
+	.new-tab--recent
 	{
 		display: flex;
 
@@ -32,7 +32,7 @@
 		gap: 0.5em;
 	}
 
-	.new-tab-container .recent-tabs
+	.new-tab--recent--tabs
 	{
 		display: grid;
 
@@ -42,7 +42,7 @@
 		gap: var(--app-tabs-content-padding);
 	}
 
-	.new-tab-container .recent-tabs .recent-tab
+	.new-tab--recent--tabs-item
 	{
 		display: flex;
 
@@ -57,7 +57,7 @@
 
 	@media screen and (min-width: 1400px)
 	{
-		.new-tab-container
+		.new-tab
 		{
 			width: 50%;
 		}
@@ -65,9 +65,9 @@
 </style>
 
 <template>
-	<div class="new-tab-container">
+	<div class="new-tab">
 		<!-- Login Logo -->
-		<div class="logo">
+		<div class="new-tab--logo">
 			<n-icon size="8em">
 				<i-tabler-new-section/>
 			</n-icon>
@@ -87,12 +87,12 @@
 		</n-form-item>
 
 		
-		<div class="recent-container">
+		<div class="new-tab--recent">
 			<div>Recent Tabs</div>
-			<div class="recent-tabs">
+			<div class="new-tab--recent--tabs">
 				<n-card v-for="(tab, idx) in recentTabs" :key="idx" size="small" hoverable>
 					<n-button text :block="true">
-						<div class="recent-tab">
+						<div class="new-tab--recent--tabs-item">
 							<n-icon size="4rem">
 								<component :is="`icon-${tab.icon}`"/>
 							</n-icon>

@@ -1,7 +1,7 @@
-<style scoped>
+<style>
 	/* Main */
 
-	.home-container
+	.home-tab
 	{
 		display: grid;
 		
@@ -23,7 +23,7 @@
 		box-sizing: border-box;
 	}
 
-	.home-container .pad-content
+	.home-tab .pad-content
 	{		
 		padding: var(--app-tile-padding-lrb);
 	}
@@ -32,12 +32,12 @@
 
 	/* Search Area */
 
-	.home-container .search-area
+	.home-tab--area--search
 	{
 		grid-area: search;
 	}	
 
-	.home-container .search-area .search-content
+	.home-tab--area--search .search-content
 	{
 		display: flex;
 
@@ -49,12 +49,12 @@
 
 	/* Button Navigation Area */
 
-	.home-container .nav-area
+	.home-tab--area--nav
 	{
 		grid-area: nav;
 	}	
 
-	.home-container .nav-area .nav-content
+	.home-tab--area--nav .nav-content
 	{
 		--user-nav-buttons-gap: 0.5rem;
 
@@ -68,7 +68,7 @@
 		gap: var(--user-nav-buttons-gap);
 	}
 
-	.home-container .nav-area .nav-content > button
+	.home-tab--area--nav .nav-content > button
 	{
 		flex-basis: calc(100% * (1/4) - var(--user-nav-buttons-gap));
 		flex-grow: 1;
@@ -76,29 +76,29 @@
 
 	/* Profile Area */
 
-	.home-container .profile-area
+	.home-tab--area--profile
 	{
 		grid-area: profile;
 	}	
 
-	.home-container .profile-area .profile-container
+	.home-tab--area--profile .profile-container
 	{
 		display: flex;
 
 		gap: 1rem;
 	}
 
-	.home-container .profile-area .profile-avatar
+	.home-tab--area--profile .profile-avatar
 	{
 		--n-avatar-size-override: 5rem;
 	}
 
-	.home-container .profile-area .profile-avatar-text
+	.home-tab--area--profile .profile-avatar-text
 	{
 		font-size: 2rem;
 	}
 
-	.home-container .profile-area .profile-content
+	.home-tab--area--profile .profile-content
 	{
 		display: flex;
 
@@ -108,19 +108,19 @@
 		justify-content: center;
 	}
 
-	.home-container .profile-area .profile-username
+	.home-tab--area--profile .profile-username
 	{
 		font-size: 1.5rem;
 	}
 
 	/* Warrant Area */
 
-	.home-container .warrant-area
+	.home-tab--area--warrant
 	{
 		grid-area: warrants;
 	}	
 
-	.home-container .warrant-area .warrant-list
+	.home-tab--area--warrant .warrant-list
 	{
 		margin: 0;
 	}
@@ -128,34 +128,34 @@
 	/* 
 		Note: Fixes list prefix extra height
 	*/
-	.home-container .warrant-area .warrant-list .n-list-item .n-list-item__prefix
+	.home-tab--area--warrant .warrant-list .n-list-item .n-list-item__prefix
 	{
 		line-height: 0;
 	}
 
-	.home-container .warrant-area .warrant-list .warrant-avatar
+	.home-tab--area--warrant .warrant-list .warrant-avatar
 	{
 		--n-avatar-size-override: 5rem;		
 	}
 
-	.home-container .warrant-area .warrant-list .warrant-avatar-text
+	.home-tab--area--warrant .warrant-list .warrant-avatar-text
 	{
 		font-size: 2rem;
 	}
 
 	/* Reports Area */
 
-	.home-container .report-area
+	.home-tab--area--report
 	{
 		grid-area: reports;
 	}
 
-	.home-container .report-area .report-list
+	.home-tab--area--report .report-list
 	{
 		margin: 0;
 	}
 
-	.home-container .statistics-area
+	.home-tab--area--statistics
 	{
 		grid-area: statistics;
 	}
@@ -164,7 +164,7 @@
 
 	@media only screen and (min-width: 900px)
 	{
-		.home-container
+		.home-tab
 		{
 			grid-template-columns: 1fr 1fr;
 			grid-template-rows: 0.5fr 1.5fr 1fr 1fr;
@@ -178,7 +178,7 @@
 
 	@media screen and (min-width: 1400px)
 	{
-		.home-container
+		.home-tab
 		{
 			grid-template-columns: 1fr 1.5fr 1fr;
 			grid-template-rows: 0.5fr 1fr 1fr;
@@ -193,9 +193,9 @@
 <template>
 	<mdt-login v-if="!auth"></mdt-login>
 
-	<div class="home-container">
+	<div class="home-tab">
 		<n-card
-			class="nav-area" 
+			class="home-tab--area--nav" 
 			title="Explore" 
 			hoverable
 			content-style="padding: var(--app-tile-padding-lrb);"
@@ -206,7 +206,7 @@
 		</n-card>
 
 		<n-card 
-			class="search-area" 
+			class="home-tab--area--search" 
 			title="Record Search" 
 			hoverable 
 			content-style="padding: var(--app-tile-padding-lrb);"
@@ -236,7 +236,7 @@
 		</n-card>
 
 		<n-card 
-			class="warrant-area" 
+			class="home-tab--area--warrant" 
 			title="Warrants" 
 			hoverable 
 			content-style="padding: 0; overflow-y: auto;"
@@ -270,7 +270,7 @@
 		</n-card>
 
 		<n-card 
-			class="profile-area" 
+			class="home-tab--area--profile" 
 			title="Profile" 
 			hoverable 
 			content-style="padding: var(--app-tile-padding-lrb);"
@@ -311,7 +311,7 @@
 		</n-card>
 
 		<n-card 
-			class="report-area" 
+			class="home-tab--area--report" 
 			title="Reports" 
 			hoverable 
 			content-style="padding: 0; overflow-y: auto;"
@@ -338,7 +338,7 @@
 		</n-card>
 
 		<n-card 
-			class="statistics-area" 
+			class="home-tab--area--statistics" 
 			title="Statistics" 
 			hoverable 
 			content-style="padding: var(--app-tile-padding-lrb);"
