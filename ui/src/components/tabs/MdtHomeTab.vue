@@ -3,8 +3,6 @@
 
 	.home-container
 	{
-		--tile-content-padding: 0px 1rem 1rem 1rem;
-
 		display: grid;
 		
 		height: 100%;
@@ -27,7 +25,7 @@
 
 	.home-container .pad-content
 	{		
-		padding: var(--tile-content-padding);
+		padding: var(--app-tile-padding-lrb);
 	}
 
 	/* Content Areas */
@@ -200,7 +198,7 @@
 			class="nav-area" 
 			title="Explore" 
 			hoverable
-			content-style="padding: var(--tile-content-padding);"
+			content-style="padding: var(--app-tile-padding-lrb);"
 		>
 			<div class="nav-content">
 				<n-button v-for="(nav, idx) in navBtns" :key="idx">{{ nav.label }}</n-button>
@@ -211,7 +209,7 @@
 			class="search-area" 
 			title="Record Search" 
 			hoverable 
-			content-style="padding: var(--tile-content-padding);"
+			content-style="padding: var(--app-tile-padding-lrb);"
 		>
 			<div class="search-content">
 				<n-input-group>
@@ -275,7 +273,7 @@
 			class="profile-area" 
 			title="Profile" 
 			hoverable 
-			content-style="padding: var(--tile-content-padding);"
+			content-style="padding: var(--app-tile-padding-lrb);"
 		>
 			<div class="profile-container">
 				<n-avatar class="profile-avatar" :src="profile.avatar" @error="onProfileAvatarError" v-if="profileAvatarLoadFailed"></n-avatar>				
@@ -302,7 +300,7 @@
 			</template>
 
 			<template #header-extra>
-				<n-button text>
+				<n-button text @click="$store.commit('openTab', { label: 'Profile', component: 'mdt-profile-tab' })">
 					<template #icon>
 						<n-icon>
 							<i-tabler-external-link/>
@@ -343,7 +341,7 @@
 			class="statistics-area" 
 			title="Statistics" 
 			hoverable 
-			content-style="padding: var(--tile-content-padding);"
+			content-style="padding: var(--app-tile-padding-lrb);"
 		>
 			Content
 		</n-card>

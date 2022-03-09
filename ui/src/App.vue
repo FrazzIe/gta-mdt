@@ -5,9 +5,13 @@
 		--app-tabs-tab-height: 42px;
 		--app-tabs-tab-border-radius: 0;
 		--app-tabs-height-offset: calc(var(--app-tabs-padding-top) + var(--app-tabs-tab-height));
+
 		--app-tabs-content-padding: 1.5rem;
 		--app-tabs-content-padding-lr: 0px var(--app-tabs-content-padding);
 		--app-tabs-content-padding-tb: var(--app-tabs-content-padding) 0px;
+
+		--app-tile-padding: 1rem;
+		--app-tile-padding-lrb: 0px var(--app-tile-padding) var(--app-tile-padding) var(--app-tile-padding)
 	}
 	
 	/* App layout */
