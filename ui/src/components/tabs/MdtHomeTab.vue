@@ -1,4 +1,4 @@
-<style>
+<style scoped>
 	/* Main */
 
 	.home-container
