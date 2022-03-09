@@ -13,7 +13,7 @@
 
 		transform: translate(-50%, -50%);
 
-		gap: 1em;
+		gap: 1rem;
 	}
 
 	.new-tab-container .logo
@@ -39,7 +39,7 @@
 		grid-template-columns: 1fr 1fr 1fr 1fr;
 		grid-template-rows: 1fr;
 
-		gap: 1.5em;
+		gap: var(--app-tabs-content-padding);
 	}
 
 	.new-tab-container .recent-tabs .recent-tab

@@ -9,23 +9,23 @@
 
 		box-sizing: border-box;
 
-		padding: 1.5rem 0px 1.5rem 0px;
+		padding: var(--app-tabs-content-padding-tb);
 	}
 
 	.search-input
 	{
-		padding: 0px 1.5rem 0px 1.5rem;
+		padding: var(--app-tabs-content-padding-lr);
 	}
 
 	.search-label
 	{
-		padding: 0px 1.5rem 0px 1.5rem;
+		padding: var(--app-tabs-content-padding-lr);
 		margin: 0;
 	}
 
 	.search-results
 	{
-		padding: 0px 1.5rem 0px 1.5rem;
+		padding: var(--app-tabs-content-padding-lr);
 		margin: 0;
 	}
 
@@ -66,7 +66,7 @@
 		align-items: center;
 		justify-content: center;
 
-		padding: 1.5rem 1.5rem 0px 1.5rem;
+		padding: var(--app-tabs-content-padding) var(--app-tabs-content-padding) 0px var(--app-tabs-content-padding);
 	}
 </style>
 

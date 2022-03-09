@@ -3,7 +3,7 @@
 
 	.home-container
 	{
-		--content-padding: 0px 1em 1em 1em;
+		--tile-content-padding: 0px 1rem 1rem 1rem;
 
 		display: grid;
 		
@@ -17,8 +17,8 @@
 			" reports    "
 			" statistics ";
 
-		gap: 1.5rem;
-		padding: 1.5rem;
+		gap: var(--app-tabs-content-padding);
+		padding: var(--app-tabs-content-padding);
 
 		overflow: auto;
 
@@ -27,7 +27,7 @@
 
 	.home-container .pad-content
 	{		
-		padding: var(--content-padding);
+		padding: var(--tile-content-padding);
 	}
 
 	/* Content Areas */
@@ -58,7 +58,7 @@
 
 	.home-container .nav-area .nav-content
 	{
-		--user-nav-buttons-gap: 0.5em;
+		--user-nav-buttons-gap: 0.5rem;
 
 		display: flex;
 
@@ -87,7 +87,7 @@
 	{
 		display: flex;
 
-		gap: 1em;
+		gap: 1rem;
 	}
 
 	.home-container .profile-area .profile-avatar
@@ -200,7 +200,7 @@
 			class="nav-area" 
 			title="Explore" 
 			hoverable
-			content-style="padding: var(--content-padding);"
+			content-style="padding: var(--tile-content-padding);"
 		>
 			<div class="nav-content">
 				<n-button v-for="(nav, idx) in navBtns" :key="idx">{{ nav.label }}</n-button>
@@ -211,7 +211,7 @@
 			class="search-area" 
 			title="Record Search" 
 			hoverable 
-			content-style="padding: var(--content-padding);"
+			content-style="padding: var(--tile-content-padding);"
 		>
 			<div class="search-content">
 				<n-input-group>
@@ -275,7 +275,7 @@
 			class="profile-area" 
 			title="Profile" 
 			hoverable 
-			content-style="padding: var(--content-padding);"
+			content-style="padding: var(--tile-content-padding);"
 		>
 			<div class="profile-container">
 				<n-avatar class="profile-avatar" :src="profile.avatar" @error="onProfileAvatarError" v-if="profileAvatarLoadFailed"></n-avatar>				
@@ -343,7 +343,7 @@
 			class="statistics-area" 
 			title="Statistics" 
 			hoverable 
-			content-style="padding: var(--content-padding);"
+			content-style="padding: var(--tile-content-padding);"
 		>
 			Content
 		</n-card>
