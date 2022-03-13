@@ -72,6 +72,11 @@
 
 			<n-element class="record-wanted" tag="span">WANTED</n-element>
 		</div>
+
+		<n-card class="profile-tab--notes" title="Notes">
+			<n-input class="notes-input" type="textarea" placeholder="Enter notes..."></n-input>
+		</n-card>
+
 	</div>
 </template>
 
