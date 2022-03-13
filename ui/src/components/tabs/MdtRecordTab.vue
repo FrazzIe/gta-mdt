@@ -31,6 +31,14 @@
 	{
 		font-size: 1.5rem;
 	}
+
+	.record-tab--header .record-wanted
+	{
+		align-self: center;
+
+		color: var(--warning-color);
+		font-size: 2rem;		
+	}
 </style>
 
 <template>
@@ -47,6 +55,8 @@
 				<span>ID: 12D7237237</span>
 				<span>Male — 15/07/1999 (22)</span>
 			</div>
+
+			<n-element class="record-wanted" tag="span">WANTED</n-element>
 		</div>
 	</div>
 </template>
