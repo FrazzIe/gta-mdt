@@ -1,7 +1,20 @@
 <style>
 	.record-tab
 	{
+		display: grid;
+
+		height: 100%;
+
+		grid-template-areas: 
+			" header  header  "
+			" notes   caution "
+			" reports assets  ";
+		grid-template-rows: 0fr;
+
 		padding: var(--app-tabs-content-padding);
+		gap: var(--app-tabs-content-padding);
+
+		box-sizing: border-box;
 	}
 
 	/* Header Area */
@@ -12,6 +25,7 @@
 		display: flex;
 
 		gap: 1rem;
+		grid-area: header;
 	}
 
 	.record-tab--header  .record-avatar
