@@ -53,6 +53,19 @@
 		color: var(--warning-color);
 		font-size: 2rem;		
 	}
+
+	/* Caution Code Area */
+	.record-tab--caution
+	{
+		grid-area: caution;
+	}
+
+	.record-tab--caution .caution-list
+	{
+		display: flex;
+
+		flex-direction: column;
+	}
 </style>
 
 <template>
@@ -77,11 +90,16 @@
 			<n-input class="notes-input" type="textarea" placeholder="Enter notes..."></n-input>
 		</n-card>
 
+		<n-card class="record-tab--caution" title="Caution codes">
+			<n-checkbox-group class="caution-list" v-model:value="codes" @update:value="updateCodes">
+				<n-checkbox v-for="code in codeList" :label="code.label" :value="code.key"></n-checkbox>
+			</n-checkbox-group>
+		</n-card>		
 	</div>
 </template>
 
 <script lang="ts">
-	import { defineComponent } from "vue";
+	import { defineComponent, ref } from "vue";
 
 	export default defineComponent({
 		props:
@@ -92,9 +110,28 @@
 				required: true
 			}
 		},
+		methods:
+		{
+			updateCodes(value: (string | number)[])
+			{
+				this.codes = value;
+			}
+		},
 		setup()
 		{
-			return { };
+			const codes = ref<(string | number)[] | null>(null);
+			const codeList =
+			[
+				{ label: "Violent", key: "V" },
+				{ label: "Police Hater", key: "PH" },
+				{ label: "Escape Risk", key: "E" },
+				{ label: "Mental Instability", key: "M" },
+				{ label: "Suicidal Tendencies", key: "ST" },
+				{ label: "Gang", key: "G" },
+				{ label: "Convicted Violent Felon", key: "C" }
+			];
+
+			return { codes, codeList };
 		}
 	});
 </script>
