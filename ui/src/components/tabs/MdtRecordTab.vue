@@ -17,6 +17,11 @@
 		box-sizing: border-box;
 	}
 
+	.record-tab .pad-content
+	{		
+		padding: var(--app-tile-padding-lrb);
+	}
+
 	/* Header Area */
 
 	.record-tab--header
@@ -94,12 +99,31 @@
 			<n-checkbox-group class="caution-list" v-model:value="codes" @update:value="updateCodes">
 				<n-checkbox v-for="code in codeList" :label="code.label" :value="code.key"></n-checkbox>
 			</n-checkbox-group>
-		</n-card>		
+		</n-card>
+		
+		<n-card 
+			class="profile-tab--reports" 
+			title="Reports"
+			hoverable 
+			content-style="padding: 0; overflow-y: auto;"
+		>
+			<n-scrollbar>
+				<n-list class="report-list pad-content">
+					<n-list-item v-for="(report, idx) in latestReports" :key="idx">
+						<n-thing :title="report.title" :description="reportSubtitle(report.type, report.created)">
+							{{ report.summary }}
+						</n-thing>
+					</n-list-item>
+				</n-list>
+			</n-scrollbar>
+		</n-card>
+
 	</div>
 </template>
 
 <script lang="ts">
 	import { defineComponent, ref } from "vue";
+	import { useStore } from "../../store";
 
 	export default defineComponent({
 		props:
@@ -115,10 +139,19 @@
 			updateCodes(value: (string | number)[])
 			{
 				this.codes = value;
+			},
+			formatTimestamp(num: number): string
+			{
+				return new Date(num).toLocaleString("en-US");
+			},
+			reportSubtitle(type: string, num: number)
+			{
+				return `${type.charAt(0).toUpperCase()}${type.slice(1)} — ${this.formatTimestamp(num)}`;
 			}
 		},
 		setup()
 		{
+			const store = useStore();
 			const codes = ref<(string | number)[] | null>(null);
 			const codeList =
 			[
@@ -131,7 +164,11 @@
 				{ label: "Convicted Violent Felon", key: "C" }
 			];
 
-			return { codes, codeList };
+			return { 
+				codes,
+				codeList,
+				latestReports: store.state.latest.reports
+			};
 		}
 	});
 </script>
