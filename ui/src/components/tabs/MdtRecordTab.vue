@@ -98,11 +98,21 @@
 			<n-element class="record-wanted" tag="span">WANTED</n-element>
 		</div>
 
-		<n-card class="profile-tab--notes" title="Notes">
+		<n-card 
+			class="profile-tab--notes" 
+			title="Notes"
+			hoverable
+			content-style="padding: var(--app-tile-padding-lrb);"
+		>
 			<n-input class="notes-input" type="textarea" placeholder="Enter notes..."></n-input>
 		</n-card>
 
-		<n-card class="record-tab--caution" title="Caution codes">
+		<n-card 
+			class="record-tab--caution" 
+			title="Caution codes"
+			hoverable
+			content-style="padding: var(--app-tile-padding-lrb);"
+		>
 			<n-checkbox-group class="caution-list" v-model:value="codes" @update:value="updateCodes">
 				<n-checkbox v-for="code in codeList" :label="code.label" :value="code.key"></n-checkbox>
 			</n-checkbox-group>
@@ -125,7 +135,12 @@
 			</n-scrollbar>
 		</n-card>
 
-		<n-card class="record-tab--assets" title="Assets">
+		<n-card 
+			class="record-tab--assets" 
+			title="Assets"
+			hoverable
+			content-style="padding: var(--app-tile-padding-lrb);"
+		>
 
 		</n-card>
 	</div>
