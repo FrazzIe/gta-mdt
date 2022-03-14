@@ -6,10 +6,12 @@
 		height: 100%;
 
 		grid-template-areas: 
-			" header  header  "
-			" notes   caution "
-			" reports assets  ";
-		grid-template-rows: 0fr;
+			" header  header  header  header  header header "
+			" reports reports notes   notes   assets assets "
+			" reports reports notes   notes   assets assets "
+			" reports reports caution caution assets assets ";
+		grid-template-columns: repeat(6, 1fr);
+		grid-template-rows: 0.5fr 1.5fr 1.5fr 0.5fr;
 
 		padding: var(--app-tabs-content-padding);
 		gap: var(--app-tabs-content-padding);
