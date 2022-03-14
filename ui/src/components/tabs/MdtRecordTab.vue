@@ -71,6 +71,11 @@
 
 		flex-direction: column;
 	}
+
+	.record-tab--assets
+	{
+		grid-area: assets;
+	}
 </style>
 
 <template>
@@ -118,6 +123,9 @@
 			</n-scrollbar>
 		</n-card>
 
+		<n-card class="record-tab--assets" title="Assets">
+
+		</n-card>
 	</div>
 </template>
 
