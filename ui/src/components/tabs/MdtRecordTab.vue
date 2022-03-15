@@ -6,7 +6,7 @@
 		height: 100%;
 
 		grid-template-areas: 
-			" reports reports  header  header  header header "
+			" reports reports header  header  header header "
 			" reports reports notes   notes   assets assets "
 			" reports reports notes   notes   assets assets "
 			" reports reports caution caution assets assets ";
@@ -35,12 +35,12 @@
 		grid-area: header;
 	}
 
-	.record-tab--header  .record-avatar
+	.record-tab--header .record-avatar
 	{
 		--n-avatar-size-override: 6rem;
 	}
 
-	.record-tab--header  .record-info
+	.record-tab--header .record-info
 	{
 		display: flex;
 
