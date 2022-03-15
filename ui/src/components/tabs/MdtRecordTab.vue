@@ -133,6 +133,20 @@
 					</n-list-item>
 				</n-list>
 			</n-scrollbar>
+
+			<template #header-extra>
+				<n-popselect v-model:value="report.filter" multiple :options="report.filterOptions">
+					<n-button text icon-placement="right">
+						<template #icon>
+							<n-icon>
+								<i-tabler-filter />
+							</n-icon>
+						</template>
+
+						Filter
+					</n-button>
+				</n-popselect>
+			</template>
 		</n-card>
 
 		<n-card 
@@ -147,7 +161,7 @@
 </template>
 
 <script lang="ts">
-	import { defineComponent, ref } from "vue";
+	import { defineComponent, ref, reactive } from "vue";
 	import { useStore } from "../../store";
 
 	export default defineComponent({
@@ -189,9 +203,24 @@
 				{ label: "Convicted Violent Felon", key: "C" }
 			];
 
+			const filter = ref<string[] | null>(null);
+			const filterOptions = 
+			[
+				{ label: "Arrest", value: "arrest" },
+				{ label: "Citation", value: "citation" },
+				{ label: "Warrant", value: "warrant" },
+				{ label: "Incident", value: "incident" }
+			];
+
+			const report = reactive({
+				filter,
+				filterOptions
+			});
+
 			return { 
 				codes,
 				codeList,
+				report,
 				latestReports: store.state.latest.reports
 			};
 		}
