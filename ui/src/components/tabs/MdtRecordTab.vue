@@ -205,11 +205,13 @@
 			hoverable
 			content-style="padding: 0; overflow-y: auto;"
 		>
-			<n-tabs class="asset-tabs" justify-content="space-evenly" type="line" pane-class="asset-pane">
-				<n-tab-pane name="tab-0" tab="Weapons">
+			<n-tabs class="asset-tabs" justify-content="space-evenly" type="line" pane-class="asset-pane" display-directive="show:lazy">
+				<n-tab-pane v-for="(assetType, idx) in assets" :name="`tab-${idx}`" :tab="assetType.label">
 					<n-scrollbar>
 						<n-list class="app-pad-tile-list app-margin-0">
-							
+							<n-list-item v-for="(asset, idx) in assetType.data" :key="idx">
+								<n-thing title="x" description="y" />
+							</n-list-item>							
 						</n-list>
 					</n-scrollbar>
 				</n-tab-pane>
@@ -280,10 +282,18 @@
 				filterOptions
 			});
 
+			// Assets
+			const assets = reactive([
+				{ label: "Weapons", data: [] },
+				{ label: "Vehicles", data: [] },
+				{ label: "Properties", data: [] }
+			]);
+
 			return { 
 				codes,
 				codeList,
 				reports,
+				assets
 			};
 		}
 	});
