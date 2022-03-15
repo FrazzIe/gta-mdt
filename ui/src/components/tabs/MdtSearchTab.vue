@@ -12,23 +12,6 @@
 		padding: var(--app-tabs-content-padding-tb);
 	}
 
-	.search-tab--input
-	{
-		padding: var(--app-tabs-content-padding-lr);
-	}
-
-	.search-tab--results-label
-	{
-		padding: var(--app-tabs-content-padding-lr);
-		margin: 0;
-	}
-
-	.search-tab--results
-	{
-		padding: var(--app-tabs-content-padding-lr);
-		margin: 0;
-	}
-
 	/* 
 		Note: Fixes list prefix extra height
 	*/
@@ -67,7 +50,7 @@
 
 <template>
 	<div class="search-tab">
-		<n-form-item class="search-tab--input" label="Record Search">
+		<n-form-item class="app-pad-tab-content lr" label="Record Search">
 			<n-input-group>
 				<n-input type="text" placeholder="Citizen ID, Name..." size="large">
 					<template #prefix>
@@ -80,10 +63,10 @@
 			</n-input-group>
 		</n-form-item>
 
-		<h3 class="search-tab--results-label">Search results</h3>
+		<h3 class="app-pad-tab-content lr app-margin-0">Search results</h3>
 
 		<n-scrollbar>
-			<n-list class="search-tab--results">
+			<n-list class="search-tab--results app-pad-tab-content lr app-margin-0">
 				<n-list-item class="search-tab--results-item" v-for="i in 20" :key="i">
 					<template #prefix>
 						<n-avatar class="avatar">

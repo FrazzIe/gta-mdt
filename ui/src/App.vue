@@ -35,6 +35,21 @@
 		padding: var(--app-tile-padding-lr);
 	}
 
+	.app-pad-tab-content
+	{
+		padding: var(--app-tabs-content-padding);
+	}
+
+	.app-pad-tab-content.tb
+	{
+		padding: var(--app-tabs-content-padding-tb);
+	}
+
+	.app-pad-tab-content.lr
+	{
+		padding: var(--app-tabs-content-padding-lr);
+	}
+
 	.app-margin-0
 	{
 		margin: 0 !important;
