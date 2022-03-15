@@ -94,6 +94,26 @@
 	{
 		grid-area: assets;
 	}
+
+	.record-tab--assets .asset-tabs
+	{
+		display: flex;
+
+		height: 100%;
+
+		flex-direction: column;
+	}
+
+	.record-tab--assets .asset-pane
+	{
+		flex: 1;
+
+		padding: 0;
+
+		overflow-y: auto;
+		
+		box-sizing: border-box;
+	}
 </style>
 
 <template>
@@ -185,9 +205,15 @@
 			hoverable
 			content-style="padding: 0; overflow-y: auto;"
 		>
-			<n-list class="app-pad-tile-list app-margin-0">
-
-			</n-list>
+			<n-tabs class="asset-tabs" justify-content="space-evenly" type="line" pane-class="asset-pane">
+				<n-tab-pane name="tab-0" tab="Weapons">
+					<n-scrollbar>
+						<n-list class="app-pad-tile-list app-margin-0">
+							
+						</n-list>
+					</n-scrollbar>
+				</n-tab-pane>
+			</n-tabs>
 		</n-card>
 	</div>
 </template>
