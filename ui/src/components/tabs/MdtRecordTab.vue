@@ -6,7 +6,7 @@
 		height: 100%;
 
 		grid-template-areas: 
-			" header  header  header  header  header header "
+			" reports reports  header  header  header header "
 			" reports reports notes   notes   assets assets "
 			" reports reports notes   notes   assets assets "
 			" reports reports caution caution assets assets ";
@@ -74,6 +74,32 @@
 		flex-direction: column;
 	}
 
+	/* Reports Area */
+
+	.record-tab--reports
+	{
+		grid-area: reports;
+	}
+
+	.record-tab--reports .report-list
+	{
+		margin: 0;
+	}
+
+	.record-tab--reports .report-content
+	{
+		display: flex;
+		
+		height: 100%;
+
+		flex-direction: column;
+	}
+
+	.record-tab--reports .report-separator
+	{
+		margin: 0;
+	}
+
 	.record-tab--assets
 	{
 		grid-area: assets;
@@ -119,23 +145,37 @@
 		</n-card>
 		
 		<n-card 
-			class="profile-tab--reports" 
+			class="record-tab--reports" 
 			title="Reports"
 			hoverable 
 			content-style="padding: 0; overflow-y: auto;"
 		>
-			<n-scrollbar>
-				<n-list class="report-list pad-content">
-					<n-list-item v-for="(report, idx) in latestReports" :key="idx">
-						<n-thing :title="report.title" :description="reportSubtitle(report.type, report.created)">
-							{{ report.summary }}
-						</n-thing>
-					</n-list-item>
-				</n-list>
-			</n-scrollbar>
+			<div class="report-content">
+				<div class="pad-content">
+					<n-input type="text" placeholder="Title, Name...">
+						<template #prefix>
+							<n-icon size="1.2rem">
+								<i-tabler-search />
+							</n-icon>
+						</template>
+					</n-input>
+				</div>
+
+				<n-divider class="report-separator" />
+
+				<n-scrollbar>
+					<n-list class="report-list pad-content">
+						<n-list-item v-for="(report, idx) in reports.latest" :key="idx">
+							<n-thing :title="report.title" :description="reportSubtitle(report.type, report.created)">
+								{{ report.summary }}
+							</n-thing>
+						</n-list-item>
+					</n-list>
+				</n-scrollbar>
+			</div>
 
 			<template #header-extra>
-				<n-popselect v-model:value="report.filter" multiple :options="report.filterOptions">
+				<n-popselect v-model:value="reports.filter" multiple :options="reports.filterOptions">
 					<n-button text icon-placement="right">
 						<template #icon>
 							<n-icon>
@@ -212,7 +252,8 @@
 				{ label: "Incident", value: "incident" }
 			];
 
-			const report = reactive({
+			const reports = reactive({
+				latest: store.state.latest.reports,
 				filter,
 				filterOptions
 			});
@@ -220,8 +261,7 @@
 			return { 
 				codes,
 				codeList,
-				report,
-				latestReports: store.state.latest.reports
+				reports,
 			};
 		}
 	});
