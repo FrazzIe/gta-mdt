@@ -23,11 +23,6 @@
 		box-sizing: border-box;
 	}
 
-	.home-tab .pad-content
-	{		
-		padding: var(--app-tile-padding-lrb);
-	}
-
 	/* Content Areas */
 
 	/* Search Area */
@@ -252,7 +247,7 @@
 			</template>
 
 			<n-scrollbar>
-				<n-list class="warrant-list pad-content">
+				<n-list class="warrant-list app-pad-tile-list">
 					<n-list-item v-for="(warrant, idx) in latestWarrants" :key="idx">
 						<template #prefix>
 							<n-avatar class="warrant-avatar">
@@ -327,7 +322,7 @@
 			</template>
 
 			<n-scrollbar>
-				<n-list class="report-list pad-content">
+				<n-list class="report-list app-pad-tile-list">
 					<n-list-item v-for="(report, idx) in latestReports" :key="idx">
 						<n-thing :title="report.title" :description="reportSubtitle(report.type, report.created)">
 							{{ report.summary }}

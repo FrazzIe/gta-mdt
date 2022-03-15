@@ -11,7 +11,8 @@
 		--app-tabs-content-padding-tb: var(--app-tabs-content-padding) 0px;
 
 		--app-tile-padding: 1rem;
-		--app-tile-padding-lrb: 0px var(--app-tile-padding) var(--app-tile-padding) var(--app-tile-padding)
+		--app-tile-padding-lrb: 0px var(--app-tile-padding) var(--app-tile-padding) var(--app-tile-padding);
+		--app-tile-padding-lr: 0px var(--app-tile-padding);
 	}
 	
 	/* App layout */
@@ -27,6 +28,11 @@
 		top: 50%;
 
 		transform: translate(-50%, -50%);
+	}
+
+	.app-pad-tile-list
+	{
+		padding: var(--app-tile-padding-lr);
 	}
 
 	/* Tabulation */

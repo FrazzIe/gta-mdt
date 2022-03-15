@@ -164,7 +164,7 @@
 				<n-divider class="report-separator" />
 
 				<n-scrollbar>
-					<n-list class="report-list pad-content">
+					<n-list class="report-list app-pad-tile-list">
 						<n-list-item v-for="(report, idx) in reports.latest" :key="idx">
 							<n-thing :title="report.title" :description="reportSubtitle(report.type, report.created)">
 								{{ report.summary }}

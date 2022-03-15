@@ -19,11 +19,6 @@
 		box-sizing: border-box;
 	}
 
-	.profile-tab .pad-content
-	{		
-		padding: var(--app-tile-padding-lrb);
-	}
-
 	/* Header Area */
 
 	.profile-tab--header
@@ -133,7 +128,7 @@
 			content-style="padding: 0; overflow-y: auto;"
 		>
 			<n-scrollbar>
-				<n-list class="report-list pad-content">
+				<n-list class="report-list app-pad-tile-list">
 					<n-list-item v-for="(report, idx) in latestReports" :key="idx">
 						<n-thing :title="report.title" :description="reportSubtitle(report.type, report.created)">
 							{{ report.summary }}
