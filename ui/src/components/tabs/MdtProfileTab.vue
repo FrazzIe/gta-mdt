@@ -73,11 +73,6 @@
 		grid-area: reports;
 	}
 
-	.profile-tab--reports .report-list
-	{
-		margin: 0;
-	}
-
 	@media screen and (min-width: 1200px)
 	{
 		.profile-tab
@@ -128,7 +123,7 @@
 			content-style="padding: 0; overflow-y: auto;"
 		>
 			<n-scrollbar>
-				<n-list class="report-list app-pad-tile-list">
+				<n-list class="app-pad-tile-list app-margin-0">
 					<n-list-item v-for="(report, idx) in latestReports" :key="idx">
 						<n-thing :title="report.title" :description="reportSubtitle(report.type, report.created)">
 							{{ report.summary }}

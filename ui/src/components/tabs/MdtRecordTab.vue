@@ -81,11 +81,6 @@
 		grid-area: reports;
 	}
 
-	.record-tab--reports .report-list
-	{
-		margin: 0;
-	}
-
 	.record-tab--reports .report-content
 	{
 		display: flex;
@@ -93,11 +88,6 @@
 		height: 100%;
 
 		flex-direction: column;
-	}
-
-	.record-tab--reports .report-separator
-	{
-		margin: 0;
 	}
 
 	.record-tab--assets
@@ -161,10 +151,10 @@
 					</n-input>
 				</div>
 
-				<n-divider class="report-separator" />
+				<n-divider class="app-margin-0" />
 
 				<n-scrollbar>
-					<n-list class="report-list app-pad-tile-list">
+					<n-list class="app-pad-tile-list app-margin-0">
 						<n-list-item v-for="(report, idx) in reports.latest" :key="idx">
 							<n-thing :title="report.title" :description="reportSubtitle(report.type, report.created)">
 								{{ report.summary }}
@@ -193,9 +183,11 @@
 			class="record-tab--assets" 
 			title="Assets"
 			hoverable
-			content-style="padding: var(--app-tile-padding-lrb);"
+			content-style="padding: 0; overflow-y: auto;"
 		>
+			<n-list class="app-pad-tile-list app-margin-0">
 
+			</n-list>
 		</n-card>
 	</div>
 </template>
@@ -231,6 +223,8 @@
 		setup()
 		{
 			const store = useStore();
+
+			// Caution codes
 			const codes = ref<(string | number)[] | null>(null);
 			const codeList =
 			[
@@ -243,6 +237,7 @@
 				{ label: "Convicted Violent Felon", key: "C" }
 			];
 
+			// Reports filtering
 			const filter = ref<string[] | null>(null);
 			const filterOptions = 
 			[
@@ -252,6 +247,7 @@
 				{ label: "Incident", value: "incident" }
 			];
 
+			// Reports
 			const reports = reactive({
 				latest: store.state.latest.reports,
 				filter,

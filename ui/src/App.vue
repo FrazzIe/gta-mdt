@@ -35,6 +35,11 @@
 		padding: var(--app-tile-padding-lr);
 	}
 
+	.app-margin-0
+	{
+		margin: 0 !important;
+	}
+
 	/* Tabulation */
 
 	.app-tabs

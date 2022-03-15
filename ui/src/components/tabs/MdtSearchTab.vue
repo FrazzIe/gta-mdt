@@ -54,11 +54,6 @@
 		flex-direction: column;
 	}
 
-	.search-tab--results-item .content .header
-	{
-		margin: 0;
-	}
-
 	.search-tab--pagination
 	{
 		display: flex;
@@ -97,7 +92,7 @@
 					</template>					
 
 					<div class="content">
-						<n-h5 class="header">First Last</n-h5>
+						<n-h5 class="app-margin-0">First Last</n-h5>
 						<div>ID: 101010101010</div>
 						<div>Male — 15/07/1999</div>
 					</div>

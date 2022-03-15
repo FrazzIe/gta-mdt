@@ -115,11 +115,6 @@
 		grid-area: warrants;
 	}	
 
-	.home-tab--area--warrant .warrant-list
-	{
-		margin: 0;
-	}
-
 	/* 
 		Note: Fixes list prefix extra height
 	*/
@@ -143,11 +138,6 @@
 	.home-tab--area--report
 	{
 		grid-area: reports;
-	}
-
-	.home-tab--area--report .report-list
-	{
-		margin: 0;
 	}
 
 	.home-tab--area--statistics
@@ -247,7 +237,7 @@
 			</template>
 
 			<n-scrollbar>
-				<n-list class="warrant-list app-pad-tile-list">
+				<n-list class="app-pad-tile-list app-margin-0">
 					<n-list-item v-for="(warrant, idx) in latestWarrants" :key="idx">
 						<template #prefix>
 							<n-avatar class="warrant-avatar">
@@ -322,7 +312,7 @@
 			</template>
 
 			<n-scrollbar>
-				<n-list class="report-list app-pad-tile-list">
+				<n-list class="app-pad-tile-list app-margin-0">
 					<n-list-item v-for="(report, idx) in latestReports" :key="idx">
 						<n-thing :title="report.title" :description="reportSubtitle(report.type, report.created)">
 							{{ report.summary }}
