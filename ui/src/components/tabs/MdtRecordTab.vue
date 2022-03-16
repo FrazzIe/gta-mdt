@@ -175,7 +175,7 @@
 
 				<n-scrollbar>
 					<n-list class="app-pad-tile-list app-margin-0">
-						<n-list-item v-for="(report, idx) in reports.latest" :key="idx">
+						<n-list-item v-for="(report, idx) in reports.list" :key="idx">
 							<n-thing :title="report.title" :description="reportSubtitle(report.type, report.created)">
 								{{ report.summary }}
 							</n-thing>
@@ -224,6 +224,9 @@
 	import { defineComponent, ref, reactive } from "vue";
 	import { useStore } from "../../store";
 
+	// interfaces
+	import Report from "./../../interfaces/report";
+
 	export default defineComponent({
 		props:
 		{
@@ -266,6 +269,11 @@
 			];
 
 			// Reports filtering
+			const reportList = ref<Report[]>([
+				{ id: 0, created: 1646678952973, type: "incident", title: "Robbery", summary: "Some summary about some report" },
+				{ id: 0, created: 1646678952973, type: "arrest",   title: "Robbery", summary: "Some summary about some report" },
+				{ id: 0, created: 1646678952973, type: "arrest",   title: "Robbery", summary: "Some summary about some report" }
+			]);
 			const filter = ref<string[] | null>(null);
 			const filterOptions = 
 			[
@@ -277,7 +285,7 @@
 
 			// Reports
 			const reports = reactive({
-				latest: store.state.latest.reports,
+				list: reportList,
 				filter,
 				filterOptions
 			});
