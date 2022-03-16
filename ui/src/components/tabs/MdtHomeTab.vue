@@ -237,7 +237,7 @@
 			</template>
 
 			<n-scrollbar>
-				<n-list class="app-pad-tile-list app-margin-0">
+				<n-list class="warrant-list app-pad-tile-list app-margin-0">
 					<n-list-item v-for="(warrant, idx) in latestWarrants" :key="idx">
 						<template #prefix>
 							<n-avatar class="warrant-avatar">
