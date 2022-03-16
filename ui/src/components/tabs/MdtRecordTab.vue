@@ -286,13 +286,31 @@
 			content-style="padding: 0; overflow-y: auto;"
 		>
 			<n-tabs class="asset-tabs" justify-content="space-evenly" type="line" pane-class="asset-pane" display-directive="show:lazy">
-				<n-tab-pane v-for="(assetType, idx) in assets" :name="`tab-${idx}`" :tab="assetType.label">
+				<n-tab-pane v-for="(assetType, idx) in assets" :name="`tab-${idx}`" :tab="assetType.label" :disabled="loading.assets">
 					<n-scrollbar>
-						<n-list class="app-pad-tile-list app-margin-0">
-							<n-list-item v-for="(asset, idx) in assetType.data" :key="idx">
-								<n-thing title="x" description="y" />
-							</n-list-item>
-						</n-list>
+						<n-spin class="app-spin-scroll" :show="loading.assets">
+							<n-list class="app-pad-tile-list app-margin-0">
+								<template v-if="loading.assets">
+									<n-list-item v-for="idx in 10" :key="idx">
+										<n-thing>
+											<template #header>
+												<n-skeleton text width="1rem" :sharp="false" :animated="false"/>
+											</template>
+
+											<template #description>
+												<n-skeleton text :sharp="false" :animated="false"/>
+											</template>
+										</n-thing>
+									</n-list-item>
+								</template>
+
+								<template v-else>
+									<n-list-item v-for="(asset, idx) in assetType.data" :key="idx">
+										<n-thing title="x" description="y" />
+									</n-list-item>
+								</template>
+							</n-list>
+						</n-spin>
 					</n-scrollbar>
 				</n-tab-pane>
 			</n-tabs>
