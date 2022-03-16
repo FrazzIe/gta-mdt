@@ -40,6 +40,12 @@
 		--n-avatar-size-override: 6rem;
 	}
 
+	.record-tab--header .record-avatar.skeleton
+	{
+		width: var(--n-avatar-size-override);
+		height: var(--n-avatar-size-override);
+	}
+
 	.record-tab--header .record-info
 	{
 		display: flex;
@@ -59,6 +65,36 @@
 
 		color: var(--warning-color);
 		font-size: 2rem;		
+	}
+
+	/* Notes Area */
+
+	.record-tab--notes
+	{
+		grid-area: notes;
+	}
+
+	.record-tab--notes .notes-input
+	{
+		height: 100%;
+	}
+
+	.record-tab--notes .skeleton-container
+	{
+		display: flex;
+		
+		height: 100%;
+		
+		flex-direction: column;
+		
+		justify-content: space-around;
+		
+		gap: 0.5rem;
+	}
+
+	.record-tab--notes .skeleton
+	{
+		flex: 1;
 	}
 
 	/* Caution Code Area */
@@ -119,28 +155,48 @@
 <template>
 	<div class="record-tab">
 		<div class="record-tab--header">
-			<n-avatar class="record-avatar">
+			<n-skeleton class="record-avatar skeleton" :sharp="false" v-if="loading.account" />
+			<n-avatar class="record-avatar" v-else>
 				<n-icon>
 					<i-tabler-user/>
 				</n-icon>
 			</n-avatar>
 
-			<div class="record-info">
+			<div class="record-info" v-if="loading.account">
+				<span class="record-username">
+					<n-skeleton text width="50%" :sharp="false" />
+				</span>
+
+				<span>
+					<n-skeleton text width="25%" :sharp="false" />
+				</span>
+
+				<span>
+					<n-skeleton text width="30%" :sharp="false" />
+				</span>
+			</div>
+
+			<div class="record-info" v-else>
 				<span class="record-username">Eric Milton</span>
 				<span>ID: 12D7237237</span>
 				<span>Male — 15/07/1999 (22)</span>
 			</div>
-
-			<n-element class="record-wanted" tag="span">WANTED</n-element>
+			
+			<n-skeleton class="record-wanted" text width="25%" :sharp="false" v-if="loading.account" />
+			<n-element class="record-wanted" tag="span" v-else>WANTED</n-element>
 		</div>
 
 		<n-card 
-			class="profile-tab--notes" 
+			class="record-tab--notes" 
 			title="Notes"
 			hoverable
 			content-style="padding: var(--app-tile-padding-lrb);"
 		>
-			<n-input class="notes-input" type="textarea" placeholder="Enter notes..."></n-input>
+			<div class="skeleton-container" v-if="loading.account">
+				<n-skeleton class="skeleton" text :repeat="8" :sharp="false" />
+			</div>
+			
+			<n-input class="notes-input" type="textarea" placeholder="Enter notes..." v-else></n-input>
 		</n-card>
 
 		<n-card 
@@ -149,9 +205,11 @@
 			hoverable
 			content-style="padding: var(--app-tile-padding-lrb);"
 		>
-			<n-checkbox-group class="caution-list" v-model:value="codes" @update:value="updateCodes">
-				<n-checkbox v-for="code in codeList" :label="code.label" :value="code.key"></n-checkbox>
-			</n-checkbox-group>
+			<n-spin :show="loading.account">
+				<n-checkbox-group class="caution-list" v-model:value="codes" @update:value="updateCodes" :disabled="loading.account">
+					<n-checkbox v-for="code in codeList" :label="code.label" :value="code.key" :disabled="loading.account"></n-checkbox>
+				</n-checkbox-group>
+			</n-spin>
 		</n-card>
 		
 		<n-card 
@@ -211,7 +269,7 @@
 						<n-list class="app-pad-tile-list app-margin-0">
 							<n-list-item v-for="(asset, idx) in assetType.data" :key="idx">
 								<n-thing title="x" description="y" />
-							</n-list-item>							
+							</n-list-item>
 						</n-list>
 					</n-scrollbar>
 				</n-tab-pane>
@@ -254,6 +312,14 @@
 		setup()
 		{
 			const store = useStore();
+
+			// Loading
+			const loading =
+			{
+				account: true,
+				reports: true,
+				assets: true
+			};
 
 			// Caution codes
 			const codes = ref<(string | number)[] | null>(null);
@@ -307,6 +373,7 @@
 			]);
 
 			return { 
+				loading,
 				codes,
 				codeList,
 				reports,
