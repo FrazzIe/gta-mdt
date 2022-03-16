@@ -126,6 +126,15 @@
 		flex-direction: column;
 	}
 
+	.record-tab--reports .report-search
+	{
+		display: inline-flex;
+
+		align-items: center;
+
+		gap: 1rem;
+	}
+
 	.record-tab--assets
 	{
 		grid-area: assets;
@@ -219,7 +228,7 @@
 			content-style="padding: 0; overflow-y: auto;"
 		>
 			<div class="report-content">
-				<div class="pad-content">
+				<div class="report-search pad-content">
 					<n-input type="text" placeholder="Title, Name..." :disabled="loading.reports">
 						<template #prefix>
 							<n-icon size="1.2rem">
@@ -227,6 +236,16 @@
 							</n-icon>
 						</template>
 					</n-input>
+
+					<n-button type="primary" secondary strong icon-placement="right" :disabled="loading.reports">
+						<template #icon>
+							<n-icon>
+								<i-tabler-playlist-add />
+							</n-icon>
+						</template>
+
+						Create
+					</n-button>
 				</div>
 
 				<n-divider class="app-margin-0" />
