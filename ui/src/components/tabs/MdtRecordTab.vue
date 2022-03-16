@@ -220,7 +220,7 @@
 		>
 			<div class="report-content">
 				<div class="pad-content">
-					<n-input type="text" placeholder="Title, Name...">
+					<n-input type="text" placeholder="Title, Name..." :disabled="loading.reports">
 						<template #prefix>
 							<n-icon size="1.2rem">
 								<i-tabler-search />
@@ -230,21 +230,43 @@
 				</div>
 
 				<n-divider class="app-margin-0" />
-
+				
 				<n-scrollbar>
-					<n-list class="app-pad-tile-list app-margin-0">
-						<n-list-item v-for="(report, idx) in reports.list" :key="idx">
-							<n-thing :title="report.title" :description="reportSubtitle(report.type, report.created)">
-								{{ report.summary }}
-							</n-thing>
-						</n-list-item>
-					</n-list>
+					<n-spin class="app-spin-scroll" :show="loading.reports">
+						<n-list class="app-pad-tile-list app-margin-0">
+
+							<template v-if="loading.reports">
+								<n-list-item v-for="idx in 10" :key="idx">
+									<n-thing>
+										<template #header>
+											<n-skeleton text width="8rem" :sharp="false" :animated="false"/>
+										</template>
+
+										<template #description>
+											<n-skeleton text width="50%" :sharp="false" :animated="false"/>
+										</template>
+
+										<n-skeleton text  :sharp="false" :animated="false"/>
+										<n-skeleton text width="60%" :sharp="false" :animated="false"/>
+									</n-thing>
+								</n-list-item>
+							</template>
+
+							<template v-else>
+								<n-list-item v-for="(report, idx) in reports.list" :key="idx">
+									<n-thing :title="report.title" :description="reportSubtitle(report.type, report.created)">
+										{{ report.summary }}
+									</n-thing>
+								</n-list-item>
+							</template>
+						</n-list>
+					</n-spin>
 				</n-scrollbar>
 			</div>
 
 			<template #header-extra>
-				<n-popselect v-model:value="reports.filter" multiple :options="reports.filterOptions">
-					<n-button text icon-placement="right">
+				<n-popselect v-model:value="reports.filter" multiple :options="reports.filterOptions" :disabled="loading.reports">
+					<n-button text icon-placement="right" :disabled="loading.reports">
 						<template #icon>
 							<n-icon>
 								<i-tabler-filter />

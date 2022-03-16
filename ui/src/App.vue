@@ -55,6 +55,12 @@
 		margin: 0 !important;
 	}
 
+	/* Fix for n-spin, ensure spinner is centered with scrollable content */
+	.app-spin-scroll
+	{
+		position: inherit !important;
+	}
+
 	/* Tabulation */
 
 	.app-tabs
