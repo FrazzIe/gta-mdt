@@ -79,6 +79,12 @@
 		height: 100%;
 	}
 
+	/* Disable textarea resize */
+	.record-tab--notes .notes-input > div:first-child
+	{
+		resize: none !important;
+	}
+
 	.record-tab--notes .skeleton-container
 	{
 		display: flex;
