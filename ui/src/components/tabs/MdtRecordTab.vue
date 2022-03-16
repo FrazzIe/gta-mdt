@@ -229,7 +229,7 @@
 		>
 			<div class="report-content">
 				<div class="report-search pad-content">
-					<n-input type="text" placeholder="Title, Name..." :disabled="loading.reports">
+					<n-input type="text" placeholder="Title, Name..." v-model:value="reports.search" :disabled="loading.reports">
 						<template #prefix>
 							<n-icon size="1.2rem">
 								<i-tabler-search />
@@ -272,7 +272,7 @@
 							</template>
 
 							<template v-else>
-								<n-list-item v-for="(report, idx) in reports.list" :key="idx">
+								<n-list-item v-for="(report, idx) in reports.filteredList" :key="idx">
 									<n-thing :title="report.title" :description="reportSubtitle(report.type, report.created)">
 										{{ report.summary }}
 									</n-thing>
@@ -338,7 +338,7 @@
 </template>
 
 <script lang="ts">
-	import { defineComponent, ref, reactive } from "vue";
+	import { defineComponent, ref, reactive, computed } from "vue";
 	import { useStore } from "../../store";
 
 	// interfaces
@@ -393,26 +393,47 @@
 				{ label: "Convicted Violent Felon", key: "C" }
 			];
 
-			// Reports filtering
-			const reportList = ref<Report[]>([
-				{ id: 0, created: 1646678952973, type: "incident", title: "Robbery", summary: "Some summary about some report" },
-				{ id: 0, created: 1646678952973, type: "arrest",   title: "Robbery", summary: "Some summary about some report" },
-				{ id: 0, created: 1646678952973, type: "arrest",   title: "Robbery", summary: "Some summary about some report" }
-			]);
-			const filter = ref<string[] | null>(null);
-			const filterOptions = 
+			// Reports
+			const reportSearch = ref<string>("");
+			const reportFilter = ref<string[] | null>(null);
+			const reportFilterOptions =
 			[
 				{ label: "Arrest", value: "arrest" },
 				{ label: "Citation", value: "citation" },
 				{ label: "Warrant", value: "warrant" },
 				{ label: "Incident", value: "incident" }
 			];
+			const reportsList = ref<Report[]>([
+				{ id: 0, created: 1646678952973, type: "incident", title: "Robbery", summary: "Some summary about some report" },
+				{ id: 0, created: 1646678952973, type: "arrest",   title: "Robbery", summary: "Some summary about some report" },
+				{ id: 0, created: 1646678952973, type: "arrest",   title: "Robbery", summary: "Some summary about some report" }					
+			]);
+			const reportsListFiltered = computed(() => 
+			{
+				const search = reportSearch.value.toLowerCase();
 
-			// Reports
-			const reports = reactive({
-				list: reportList,
-				filter,
-				filterOptions
+				return reportsList.value.filter((report) => 
+				{
+					if (!reports.filter?.includes(report.type))
+					{
+						return false;
+					}
+
+					if (search.length < 3)
+					{
+						return true;
+					}
+
+					return report.title.toLowerCase().indexOf(search) >= 0 || report.id.toString().indexOf(search) >= 0;
+				});
+			});
+
+			const reports = reactive({				
+				search: reportSearch,
+				filter: reportFilter,
+				filterOptions: reportFilterOptions,
+				list: reportsList,
+				filteredList: reportsListFiltered
 			});
 
 			// Assets
