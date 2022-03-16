@@ -292,9 +292,18 @@
 
 			// Assets
 			const assets = reactive([
-				{ label: "Weapons", data: [] },
-				{ label: "Vehicles", data: [] },
-				{ label: "Properties", data: [] }
+				{
+					label: "Weapons",
+					data: []
+				},
+				{
+					label: "Vehicles",
+					data: []
+				},
+				{
+					label: "Properties",
+					data: []
+				}
 			]);
 
 			return { 
