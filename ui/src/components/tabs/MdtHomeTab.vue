@@ -179,6 +179,7 @@
 	<mdt-login v-if="!auth"></mdt-login>
 
 	<div class="home-tab" v-else>
+		<!-- Button Navigation Tile -->
 		<n-card
 			class="home-tab--area--nav" 
 			title="Explore" 
@@ -186,10 +187,11 @@
 			content-style="padding: var(--app-tile-padding-lrb);"
 		>
 			<div class="nav-content">
-				<n-button v-for="(nav, idx) in navBtns" :key="idx">{{ nav.label }}</n-button>
+				<n-button v-for="(nav, idx) in navigationButtons" :key="idx">{{ nav.label }}</n-button>
 			</div>
 		</n-card>
 
+		<!-- Record Search Tile -->
 		<n-card 
 			class="home-tab--area--search" 
 			title="Record Search" 
@@ -220,6 +222,7 @@
 			</template>
 		</n-card>
 
+		<!-- Active Warrants Tile -->
 		<n-card 
 			class="home-tab--area--warrant" 
 			title="Warrants" 
@@ -238,7 +241,7 @@
 
 			<n-scrollbar>
 				<n-list class="warrant-list app-pad-tile-list app-margin-0">
-					<n-list-item v-for="(warrant, idx) in latestWarrants" :key="idx">
+					<n-list-item v-for="(warrant, idx) in activeWarrants" :key="idx">
 						<template #prefix>
 							<n-avatar class="warrant-avatar">
 								<span class="warrant-avatar-text">FL</span>
@@ -254,6 +257,7 @@
 
 		</n-card>
 
+		<!-- User Profile Tile -->
 		<n-card 
 			class="home-tab--area--profile" 
 			title="Profile" 
@@ -261,7 +265,7 @@
 			content-style="padding: var(--app-tile-padding-lrb);"
 		>
 			<div class="profile-container">
-				<n-avatar class="profile-avatar" :src="profile.avatar" @error="onProfileAvatarError" v-if="profileAvatarLoadFailed"></n-avatar>				
+				<n-avatar class="profile-avatar" :src="profile.avatar" @error="onAvatarError" v-if="hideAvatar"></n-avatar>				
 				<n-avatar class="profile-avatar" v-else>
 					<n-icon>
 						<i-tabler-user/>
@@ -295,6 +299,7 @@
 			</template>
 		</n-card>
 
+		<!-- Latest Reports Tile -->
 		<n-card 
 			class="home-tab--area--report" 
 			title="Reports" 
@@ -322,6 +327,7 @@
 			</n-scrollbar>
 		</n-card>
 
+		<!-- Statistics Tile -->
 		<n-card 
 			class="home-tab--area--statistics" 
 			title="Statistics" 
@@ -340,6 +346,8 @@
 	// interfaces
 	import TabOpenOptions from "../../interfaces/tabs/TabOpenOptions";
 	import NavButton from "../../interfaces/NavButton";
+	import Report from "../../interfaces/report";
+	import WarrantReport from "../../interfaces/report/Warrant";
 
 	// components
 	import MdtLogin from "../MdtLogin.vue";
@@ -359,10 +367,6 @@
 		},
 		methods:
 		{
-			onProfileAvatarError()
-			{
-				this.profileAvatarLoadFailed = true;
-			},
 			formatTimestamp(num: number): string
 			{
 				return new Date(num).toLocaleString("en-US");
@@ -386,9 +390,8 @@
 		{
 			const store = useStore();
 
-			let profileAvatarLoadFailed = ref(false);
-
-			const navBtns: NavButton[] =
+			// Button Navigation Tile
+			const navigationButtons: NavButton[] =
 			[
 				// { label: "Warrants", component: "" },
 				// { label: "Reports", component: "" },
@@ -398,13 +401,37 @@
 				// { label: "Admin", component: "" }
 			];
 
+			// User Tile
+			const hideAvatar = ref<boolean>(false);
+			const onAvatarError = function(): void
+			{
+				hideAvatar.value = true;
+			}
+
+			// Active Warrants Tile
+			const activeWarrants = ref<WarrantReport[]>([
+				{ id: 0, created: 1646678952973, type: "warrant", title: "Robbery", summary: "1st Degree Murder, Resisting Arrest, Robbery", active: true },
+				{ id: 0, created: 1646678952973, type: "warrant", title: "Robbery", summary: "1st Degree Murder, Resisting Arrest, Robbery", active: true },
+				{ id: 0, created: 1646678952973, type: "warrant", title: "Robbery", summary: "1st Degree Murder, Resisting Arrest, Robbery", active: true },
+				{ id: 0, created: 1646678952973, type: "warrant", title: "Robbery", summary: "1st Degree Murder, Resisting Arrest, Robbery", active: true }
+			]);
+
+			// Reports Tile
+			const latestReports = ref<Report[]>([
+				{ id: 0, created: 1646678952973, type: "incident", title: "Robbery", summary: "Some summary about some report" },
+				{ id: 0, created: 1646678952973, type: "incident", title: "Robbery", summary: "Some summary about some report" },
+				{ id: 0, created: 1646678952973, type: "arrest",   title: "Robbery", summary: "Some summary about some report" },
+				{ id: 0, created: 1646678952973, type: "citation", title: "Robbery", summary: "Some summary about some report" }
+			]);
+
 			return { 
-				profileAvatarLoadFailed,
-				navBtns,
+				hideAvatar,
+				onAvatarError,
+				navigationButtons,
+				activeWarrants,
+				latestReports,
 				auth: store.state.auth,
-				profile: store.state.profile,
-				latestReports: store.state.latest.reports,
-				latestWarrants: store.state.latest.warrants
+				profile: store.state.profile
 			}
 		}
 	});
