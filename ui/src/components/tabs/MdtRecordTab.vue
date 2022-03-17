@@ -6,15 +6,16 @@
 		height: 100%;
 
 		grid-template-areas: 
-			" reports reports header  header  header header "
-			" reports reports notes   notes   assets assets "
-			" reports reports notes   notes   assets assets "
-			" reports reports caution caution assets assets ";
-		grid-template-columns: repeat(6, 1fr);
-		grid-template-rows: 0.5fr 1.5fr 1.5fr 0.5fr;
+			" header header "
+			" notes caution "
+			" reports reports "
+			" assets assets ";
+		grid-template-columns: 1fr;
 
 		padding: var(--app-tabs-content-padding);
 		gap: var(--app-tabs-content-padding);
+
+		overflow-y: auto;
 
 		box-sizing: border-box;
 	}
@@ -164,6 +165,43 @@
 		overflow-y: auto;
 		
 		box-sizing: border-box;
+	}
+
+	/* Scrollable collapsing */
+
+	.record-tab--reports, .record-tab--assets
+	{
+		max-height: 80vh;
+	}
+
+	/* Media queries */
+
+	@media only screen and (min-width: 900px)
+	{
+		.record-tab
+		{
+			grid-template-areas: 
+				" header header "
+				" notes caution"
+				" reports assets ";
+				
+			grid-template-columns: 1fr 1fr;
+			grid-template-rows: 0.5fr 1.5fr 1.5fr;
+		}
+	}
+
+	@media screen and (min-width: 1400px)
+	{
+		.record-tab
+		{
+			grid-template-areas: 
+				" reports reports header  header  header header "
+				" reports reports notes   notes   assets assets "
+				" reports reports notes   notes   assets assets "
+				" reports reports caution caution assets assets ";
+			grid-template-columns: repeat(6, 1fr);
+			grid-template-rows: 0.5fr 1.5fr 1.5fr 0.5fr;
+		}
 	}
 </style>
 
