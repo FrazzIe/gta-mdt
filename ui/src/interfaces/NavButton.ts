@@ -1,5 +1,7 @@
+import TabComponent from "../types/TabComponent";
+
 export default interface NavButton
 {
 	label: string;
-	component: string;
+	component: TabComponent;
 }

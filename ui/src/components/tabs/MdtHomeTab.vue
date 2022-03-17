@@ -390,12 +390,12 @@
 
 			const navBtns: NavButton[] =
 			[
-				{ label: "Warrants", component: "" },
-				{ label: "Reports", component: "" },
-				{ label: "Records", component: "" },
-				{ label: "Search", component: "" },
-				{ label: "Profile", component: "" },
-				{ label: "Admin", component: "" }
+				// { label: "Warrants", component: "" },
+				// { label: "Reports", component: "" },
+				// { label: "Records", component: "" },
+				{ label: "Search", component: "mdt-search-tab" },
+				{ label: "Profile", component: "mdt-profile-tab" },
+				// { label: "Admin", component: "" }
 			];
 
 			return { 
