@@ -178,7 +178,7 @@
 <template>
 	<mdt-login v-if="!auth"></mdt-login>
 
-	<div class="home-tab">
+	<div class="home-tab" v-else>
 		<n-card
 			class="home-tab--area--nav" 
 			title="Explore" 
