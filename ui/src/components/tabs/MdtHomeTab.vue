@@ -339,6 +339,7 @@
 
 	// interfaces
 	import TabOpenOptions from "../../interfaces/tabs/TabOpenOptions";
+	import NavButton from "../../interfaces/NavButton";
 
 	// components
 	import MdtLogin from "../MdtLogin.vue";
@@ -387,7 +388,7 @@
 
 			let profileAvatarLoadFailed = ref(false);
 
-			const navBtns: any =
+			const navBtns: NavButton[] =
 			[
 				{ label: "Warrants", component: "" },
 				{ label: "Reports", component: "" },
