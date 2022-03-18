@@ -128,6 +128,12 @@
 		--n-avatar-size-override: 5rem;		
 	}
 
+	.home-tab--area--warrant .warrant-list .warrant-avatar.skeleton
+	{
+		width: var(--n-avatar-size-override);
+		height: var(--n-avatar-size-override);
+	}
+
 	.home-tab--area--warrant .warrant-list .warrant-avatar-text
 	{
 		font-size: 2rem;
@@ -240,19 +246,45 @@
 			</template>
 
 			<n-scrollbar>
-				<n-list class="warrant-list app-pad-tile-list app-margin-0">
-					<n-list-item v-for="(warrant, idx) in activeWarrants" :key="idx">
-						<template #prefix>
-							<n-avatar class="warrant-avatar">
-								<span class="warrant-avatar-text">FL</span>
-							</n-avatar>
-						</template>					
+				<n-spin class="app-spin-scroll" :show="loading.warrants">
+					<n-list class="warrant-list app-pad-tile-list app-margin-0">
+						<template v-if="loading.warrants">
+							<n-list-item v-for="idx in 10" :key="idx">
+								<template #prefix>
+									<n-skeleton class="warrant-avatar skeleton" :sharp="false"></n-skeleton>
+								</template>
 
-						<n-thing title="First Last" :description="formatTimestamp(warrant.created)">
-							{{ warrant.summary }}
-						</n-thing>
-					</n-list-item>
-				</n-list>
+								<n-thing>
+									<template #header>
+										<n-skeleton text width="8rem" :sharp="false" :animated="false"/>
+									</template>
+
+									<template #description>
+										<n-skeleton text width="50%" :sharp="false" :animated="false"/>
+									</template>
+
+									<n-skeleton text :sharp="false" :animated="false"/>
+									<n-skeleton text width="60%" :sharp="false" :animated="false"/>
+								</n-thing>
+							</n-list-item>
+						</template>
+
+						<template v-else>
+							<n-list-item v-for="(warrant, idx) in activeWarrants" :key="idx">
+								<template #prefix>
+									<n-avatar class="warrant-avatar">
+										<span class="warrant-avatar-text">FL</span>
+									</n-avatar>
+								</template>				
+
+								<n-thing title="First Last" :description="formatTimestamp(warrant.created)">
+									{{ warrant.summary }}
+								</n-thing>
+							</n-list-item>
+						</template>
+						
+					</n-list>
+				</n-spin>
 			</n-scrollbar>
 
 		</n-card>
@@ -317,13 +349,34 @@
 			</template>
 
 			<n-scrollbar>
-				<n-list class="app-pad-tile-list app-margin-0">
-					<n-list-item v-for="(report, idx) in latestReports" :key="idx">
-						<n-thing :title="report.title" :description="reportSubtitle(report.type, report.created)">
-							{{ report.summary }}
-						</n-thing>
-					</n-list-item>
-				</n-list>
+				<n-spin class="app-spin-scroll" :show="loading.reports">
+					<n-list class="app-pad-tile-list app-margin-0">
+							<template v-if="loading.reports">
+								<n-list-item v-for="idx in 10" :key="idx">
+									<n-thing>
+										<template #header>
+											<n-skeleton text width="8rem" :sharp="false" :animated="false"/>
+										</template>
+
+										<template #description>
+											<n-skeleton text width="50%" :sharp="false" :animated="false"/>
+										</template>
+
+										<n-skeleton text :sharp="false" :animated="false"/>
+										<n-skeleton text width="60%" :sharp="false" :animated="false"/>
+									</n-thing>
+								</n-list-item>
+							</template>
+
+							<template v-else>
+								<n-list-item v-for="(report, idx) in latestReports" :key="idx">
+									<n-thing :title="report.title" :description="reportSubtitle(report.type, report.created)">
+										{{ report.summary }}
+									</n-thing>
+								</n-list-item>
+							</template>						
+					</n-list>
+				</n-spin>
 			</n-scrollbar>
 		</n-card>
 
@@ -379,7 +432,14 @@
 		setup()
 		{
 			const store = useStore();
-			
+
+			// Loading
+			const loading =
+			{
+				reports: true,
+				warrants: true
+			};
+
 			/**
 			 * Open a tab
 			 */
@@ -423,6 +483,7 @@
 			]);
 
 			return { 
+				loading,
 				hideAvatar,				
 				navigationButtons,
 				activeWarrants,
