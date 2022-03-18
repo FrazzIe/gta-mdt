@@ -216,14 +216,14 @@
 
 			<div class="search-content">
 				<n-input-group>
-					<n-input type="text" placeholder="Citizen ID, Name...">
+					<n-input type="text" placeholder="Citizen ID, Name..." v-model:value="search">
 						<template #prefix>
 							<n-icon size="1.5rem">
 								<i-tabler-user-search />
 							</n-icon>
 						</template>
 					</n-input>
-					<n-button type="primary" @click="openTab({ label: 'Search', component: 'mdt-search-tab' })">Search</n-button>
+					<n-button type="primary" @click="openTab({ label: 'Search', component: 'mdt-search-tab', data: { search } })">Search</n-button>
 				</n-input-group>
 			</div>
 		</n-card>
@@ -459,6 +459,9 @@
 				// { label: "Admin", component: "" }
 			];
 
+			// Search Tile
+			const search = ref<string>("");
+
 			// User Tile
 			const hideAvatar = ref<boolean>(false);
 			const onAvatarError = function(): void
@@ -486,6 +489,7 @@
 				loading,
 				hideAvatar,				
 				navigationButtons,
+				search,
 				activeWarrants,
 				latestReports,
 				auth: store.state.auth,
