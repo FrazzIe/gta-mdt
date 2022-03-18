@@ -198,6 +198,16 @@
 			hoverable 
 			content-style="padding: var(--app-tile-padding-lrb);"
 		>
+			<template #header-extra>
+				<n-button text @click="openTab({ label: 'Search', component: 'mdt-search-tab' })">
+					<template #icon>
+						<n-icon>
+							<i-tabler-external-link/>
+						</n-icon>
+					</template>
+				</n-button>
+			</template>
+
 			<div class="search-content">
 				<n-input-group>
 					<n-input type="text" placeholder="Citizen ID, Name...">
@@ -207,19 +217,9 @@
 							</n-icon>
 						</template>
 					</n-input>
-					<n-button type="primary">Search</n-button>
+					<n-button type="primary" @click="openTab({ label: 'Search', component: 'mdt-search-tab' })">Search</n-button>
 				</n-input-group>
 			</div>
-
-			<template #header-extra>
-				<n-button text @click="openSearchTab">
-					<template #icon>
-						<n-icon>
-							<i-tabler-external-link/>
-						</n-icon>
-					</template>
-				</n-button>
-			</template>
 		</n-card>
 
 		<!-- Active Warrants Tile -->
@@ -264,6 +264,16 @@
 			hoverable 
 			content-style="padding: var(--app-tile-padding-lrb);"
 		>
+			<template #header-extra>
+				<n-button text @click="openTab({ label: 'Profile', component: 'mdt-profile-tab' })">
+					<template #icon>
+						<n-icon>
+							<i-tabler-external-link/>
+						</n-icon>
+					</template>
+				</n-button>
+			</template>
+
 			<div class="profile-container">
 				<n-avatar class="profile-avatar" :src="profile.avatar" @error="onAvatarError" v-if="hideAvatar"></n-avatar>				
 				<n-avatar class="profile-avatar" v-else>
@@ -286,16 +296,6 @@
 						Logout
 					</n-button>
 				</n-space>
-			</template>
-
-			<template #header-extra>
-				<n-button text @click="$store.commit('openTab', { label: 'Profile', component: 'mdt-profile-tab' })">
-					<template #icon>
-						<n-icon>
-							<i-tabler-external-link/>
-						</n-icon>
-					</template>
-				</n-button>
 			</template>
 		</n-card>
 
@@ -374,21 +374,19 @@
 			reportSubtitle(type: string, num: number)
 			{
 				return `${type.charAt(0).toUpperCase()}${type.slice(1)} — ${this.formatTimestamp(num)}`;
-			},
-			openSearchTab()
-			{
-				const options: TabOpenOptions = 
-				{
-					label: "Search",
-					component: "mdt-search-tab"
-				};
-
-				this.$store.commit("openTab", options);
 			}
 		},
 		setup()
 		{
 			const store = useStore();
+			
+			/**
+			 * Open a tab
+			 */
+			const openTab = (options: TabOpenOptions) =>
+			{
+				store.commit("openTab", options);
+			};
 
 			// Button Navigation Tile
 			const navigationButtons: NavButton[] =
@@ -406,7 +404,7 @@
 			const onAvatarError = function(): void
 			{
 				hideAvatar.value = true;
-			}
+			};
 
 			// Active Warrants Tile
 			const activeWarrants = ref<WarrantReport[]>([
@@ -425,13 +423,14 @@
 			]);
 
 			return { 
-				hideAvatar,
-				onAvatarError,
+				hideAvatar,				
 				navigationButtons,
 				activeWarrants,
 				latestReports,
 				auth: store.state.auth,
-				profile: store.state.profile
+				profile: store.state.profile,
+				onAvatarError,
+				openTab
 			}
 		}
 	});
