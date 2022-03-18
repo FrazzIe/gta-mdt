@@ -151,6 +151,28 @@
 		grid-area: statistics;
 	}
 
+	.home-tab--area--statistics .statistics-content
+	{
+		display: grid;
+
+		height: 100%;
+
+		grid-template-columns: 1fr 1fr 1fr;
+
+		justify-items: center;
+
+		gap: 1rem;
+	}
+
+	.home-tab--area--statistics .statistics-item
+	{
+		display: flex;
+
+		flex-direction: column;
+		
+		justify-content: center;
+	}
+
 	/* Media queries */
 
 	@media only screen and (min-width: 900px)
@@ -387,7 +409,9 @@
 			hoverable 
 			content-style="padding: var(--app-tile-padding-lrb);"
 		>
-			Content
+			<div class="statistics-content">
+				<n-statistic class="statistics-item" v-for="(statistic, idx) in statistics" :key="idx" :label="statistic.label" :value="statistic.count"/>
+			</div>
 		</n-card>
 	</div>
 </template>
@@ -399,6 +423,7 @@
 	// interfaces
 	import TabOpenOptions from "../../interfaces/tabs/TabOpenOptions";
 	import NavButton from "../../interfaces/NavButton";
+	import Statistic from "../../interfaces/Statistic";
 	import Report from "../../interfaces/report";
 	import WarrantReport from "../../interfaces/report/Warrant";
 
@@ -485,6 +510,16 @@
 				{ id: 0, created: 1646678952973, type: "citation", title: "Robbery", summary: "Some summary about some report" }
 			]);
 
+			// Statistics Tile
+			const statistics = ref<Statistic[]>([
+				{ label: "Reports", count: 2000 },
+				{ label: "Users", count: 2000 },
+				{ label: "Records", count: 2000 },
+				{ label: "LEO", count: 20 },
+				{ label: "EMS", count: 3 },
+				{ label: "DOJ", count: 2 }
+			]);
+
 			return { 
 				loading,
 				hideAvatar,				
@@ -492,6 +527,7 @@
 				search,
 				activeWarrants,
 				latestReports,
+				statistics,
 				auth: store.state.auth,
 				profile: store.state.profile,
 				onAvatarError,
