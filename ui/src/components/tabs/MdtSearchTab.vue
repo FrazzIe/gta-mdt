@@ -85,7 +85,7 @@
 
 		<div class="search-tab--pagination">
 			<n-pagination v-model:page="page" :page-count="100" />
-		</div>		
+		</div>
 	</div>
 </template>
 

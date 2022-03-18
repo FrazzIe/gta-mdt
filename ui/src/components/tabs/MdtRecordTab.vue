@@ -309,7 +309,7 @@
 											<n-skeleton text width="50%" :sharp="false" :animated="false"/>
 										</template>
 
-										<n-skeleton text  :sharp="false" :animated="false"/>
+										<n-skeleton text :sharp="false" :animated="false"/>
 										<n-skeleton text width="60%" :sharp="false" :animated="false"/>
 									</n-thing>
 								</n-list-item>
