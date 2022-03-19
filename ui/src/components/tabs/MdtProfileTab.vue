@@ -97,6 +97,7 @@
 
 <template>
 	<div class="profile-tab">
+		<!-- Header Tile -->
 		<div class="profile-tab--header">
 			<n-avatar class="profile-avatar">
 				<n-icon>
@@ -112,10 +113,12 @@
 			</div>
 		</div>
 
+		<!-- Notes Tile -->
 		<n-card class="profile-tab--notes" title="Notes">
 			<n-input class="notes-input" type="textarea" placeholder="Enter notes..."></n-input>
 		</n-card>
 
+		<!-- Reports Tile -->
 		<n-card 
 			class="profile-tab--reports" 
 			title="Reports"
@@ -123,21 +126,45 @@
 			content-style="padding: 0; overflow-y: auto;"
 		>
 			<n-scrollbar>
-				<n-list class="app-pad-tile-list app-margin-0">
-					<n-list-item v-for="(report, idx) in latestReports" :key="idx">
-						<n-thing :title="report.title" :description="reportSubtitle(report.type, report.created)">
-							{{ report.summary }}
-						</n-thing>
-					</n-list-item>
-				</n-list>
+				<n-spin class="app-spin-scroll" :show="loading.reports">
+					<n-list class="app-pad-tile-list app-margin-0">
+						<template v-if="loading.reports">
+							<n-list-item v-for="idx in 10" :key="idx">
+								<n-thing>
+									<template #header>
+										<n-skeleton text width="8rem" :sharp="false" :animated="false"/>
+									</template>
+
+									<template #description>
+										<n-skeleton text width="50%" :sharp="false" :animated="false"/>
+									</template>
+
+									<n-skeleton text :sharp="false" :animated="false"/>
+									<n-skeleton text width="60%" :sharp="false" :animated="false"/>
+								</n-thing>
+							</n-list-item>
+						</template>
+
+						<template v-else>
+							<n-list-item v-for="(report, idx) in latestReports" :key="idx">
+								<n-thing :title="report.title" :description="reportSubtitle(report.type, report.created)">
+									{{ report.summary }}
+								</n-thing>
+							</n-list-item>
+						</template>
+					</n-list>
+				</n-spin>
 			</n-scrollbar>
 		</n-card>
 	</div>
 </template>
 
 <script lang="ts">
-	import { defineComponent } from "vue";
+	import { defineComponent, ref } from "vue";
 	import { useStore } from "../../store";
+
+	// interfaces
+	import Report from "../../interfaces/report";
 
 	export default defineComponent({
 		props:
@@ -162,9 +189,25 @@
 		setup()
 		{
 			const store = useStore();
+
+			// Loading
+			const loading =
+			{
+				reports: true
+			};
+
+			// Reports Tile
+			const latestReports = ref<Report[]>([
+				{ id: 0, created: 1646678952973, type: "incident", title: "Robbery", summary: "Some summary about some report" },
+				{ id: 0, created: 1646678952973, type: "incident", title: "Robbery", summary: "Some summary about some report" },
+				{ id: 0, created: 1646678952973, type: "arrest",   title: "Robbery", summary: "Some summary about some report" },
+				{ id: 0, created: 1646678952973, type: "citation", title: "Robbery", summary: "Some summary about some report" }
+			]);
+
 			return {
+				loading,
+				latestReports,
 				profile: store.state.profile,
-				latestReports: store.state.latest.reports
 			};
 		}
 	});
