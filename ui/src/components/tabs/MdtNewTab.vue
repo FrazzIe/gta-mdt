@@ -73,25 +73,26 @@
 			</n-icon>
 		</div>
 
+		<!-- Search -->
 		<n-form-item label="Record Search">
 			<n-input-group>
-				<n-input type="text" placeholder="Citizen ID, Name..." size="large">
+				<n-input type="text" placeholder="Citizen ID, Name..." size="large" v-model:value="search">
 					<template #prefix>
 						<n-icon size="1.5rem">
 							<i-tabler-user-search />
 						</n-icon>
 					</template>
 				</n-input>
-				<n-button type="primary" size="large">Search</n-button>
+				<n-button type="primary" size="large" @click="openTab({ label: 'Search', component: 'mdt-search-tab', data: { search } })">Search</n-button>
 			</n-input-group>
 		</n-form-item>
 
-		
+		<!-- Recent Tabs -->
 		<div class="new-tab--recent">
 			<div>Recent Tabs</div>
 			<div class="new-tab--recent--tabs">
 				<n-card v-for="(tab, idx) in recentTabs" :key="idx" size="small" hoverable>
-					<n-button text :block="true">
+					<n-button text :block="true" @click="openRecentTab(tab)">
 						<div class="new-tab--recent--tabs-item">
 							<n-icon size="4rem">
 								<component :is="`icon-${tab.icon}`"/>
@@ -107,13 +108,18 @@
 </template>
 
 <script lang="ts">
-	import { defineComponent } from "vue";
+	import { defineComponent, ref } from "vue";
+	import { useStore } from "../../store";
 
 	// components
 	import IconUserSearch from "~icons/tabler/user-search";
 	import IconFileSearch from "~icons/tabler/file-search";
 	import IconFileText from "~icons/tabler/file-text";
 	import IconSearch from "~icons/tabler/search";
+
+	// interfaces
+	import TabOpenOptions from "../../interfaces/tabs/TabOpenOptions";
+	import TabRecentItem from "../../interfaces/tabs/TabRecentItem";
 
 	export default defineComponent({
 		components:
@@ -133,15 +139,43 @@
 		},
 		setup()
 		{
-			const recentTabs =
-			[
-				{ title: "Eric Milton", component: "", icon: "user-search" },
-				{ title: "Warrants", component: "", icon: "file-search"},
-				{ title: "Reports", component: "", icon: "file-text"},
-				{ title: "Search", component: "", icon: "search"}
-			];
+			const store = useStore();
 
-			return { recentTabs };
+			/**
+			 * Open a tab
+			 */
+			const openTab = (options: TabOpenOptions) =>
+			{
+				store.commit("openTab", options);
+			};
+
+			/**
+			 * Open a recent tab
+			 */
+			const openRecentTab = (tab: TabRecentItem) => 
+			{
+				const options: TabOpenOptions = { label: tab.title, component: tab.component };
+
+				store.commit("openTab", options);
+			};
+
+			// Search
+			const search = ref<string>("");
+
+			// Recent Tabs
+			const recentTabs = ref<TabRecentItem[]>([
+				{ title: "Eric Milton", component: "mdt-search-tab", icon: "user-search" },
+				{ title: "Warrants", component: "mdt-new-tab", icon: "file-search"},
+				{ title: "Reports", component: "mdt-new-tab", icon: "file-text"},
+				{ title: "Search", component: "mdt-search-tab", icon: "search"}
+			]);
+
+			return {
+				search,
+				recentTabs,
+				openTab,
+				openRecentTab
+			};
 		}
 	});
 </script>
