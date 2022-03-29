@@ -1,40 +1,59 @@
 <style>
 	.search-tab
 	{
-		display: flex;
+		display: grid;
 
 		height: 100%;
 
-		flex-direction: column;
+		grid-template-areas: 
+			" search  "
+			" results "
+			" results ";
+		grid-template-columns: 1fr;
+		grid-template-rows: 0fr 1fr;
+
+		padding: var(--app-tabs-content-padding);
+		gap: var(--app-tabs-content-padding);
+
+		overflow-y: auto;
 
 		box-sizing: border-box;
-
-		padding: var(--app-tabs-content-padding-tb);
 	}
 
-	/* 
-		Note: Fixes list prefix extra height
-	*/
-	.search-tab--results .n-list-item .n-list-item__prefix
+	.search-tab--search
 	{
-		line-height: 0;
+		grid-area: search;
 	}
 
-	.search-tab--results-item .avatar
+	.search-tab--results
 	{
-		--n-avatar-size-override: 5rem;		
+		grid-area: results;
 	}
 
-	.search-tab--results-item .avatar-text
-	{
-		font-size: 2rem;
-	}
-
-	.search-tab--results-item .content
+	.search-tab--results .result-tabs
 	{
 		display: flex;
 
 		flex-direction: column;
+
+		height: 100%;
+	}
+
+	.search-tab--results .result-tabs .n-tabs-nav-scroll-content .n-tabs-wrapper
+	{
+		gap: 1.5rem;
+		padding-right: 16px;
+	}
+
+	.search-tab--results .result-pane
+	{
+		flex: 1;
+
+		padding: 0;
+
+		overflow-y: auto;
+		
+		box-sizing: border-box;
 	}
 
 	.search-tab--pagination
@@ -43,48 +62,64 @@
 
 		align-items: center;
 		justify-content: center;
-
-		padding: var(--app-tabs-content-padding) var(--app-tabs-content-padding) 0px var(--app-tabs-content-padding);
 	}
 </style>
 
 <template>
 	<div class="search-tab">
-		<n-form-item class="app-pad-tab-content lr" label="Record Search">
-			<n-input-group>
-				<n-input type="text" placeholder="Citizen ID, Name..." size="large">
-					<template #prefix>
-						<n-icon size="1.5rem">
-							<i-tabler-user-search />
-						</n-icon>
-					</template>
-				</n-input>
-				<n-button type="primary" size="large">Search</n-button>
-			</n-input-group>
-		</n-form-item>
+		<div class="search-tab--search">
+			<n-form-item label="Record Search">
+				<n-input-group>
+					<n-input type="text" placeholder="Citizen ID, Name..." size="large">
+						<template #prefix>
+							<n-icon size="1.5rem">
+								<i-tabler-user-search />
+							</n-icon>
+						</template>
+					</n-input>
+					<n-button type="primary" size="large">Search</n-button>
+				</n-input-group>
+			</n-form-item>
+		</div>
 
-		<h3 class="app-pad-tab-content lr app-margin-0">Search results</h3>
+		<n-card 
+			class="search-tab--results"
+			content-style="padding: 0; overflow-y: auto;"
+		>
+			<n-tabs 
+				class="result-tabs" 
+				pane-class="result-pane" 
+				type="line" 
+				display-directive="show:lazy" 
+				justify-content="end" 
+				tab-style="padding: 0.8rem;"
+			>
+				<template #prefix>
+					<span class="app-tabs-prefix">Search results</span>
+				</template>
 
-		<n-scrollbar>
-			<n-list class="search-tab--results app-pad-tab-content lr app-margin-0">
-				<n-list-item class="search-tab--results-item" v-for="i in 20" :key="i">
-					<template #prefix>
-						<n-avatar class="avatar">
-							<span class="avatar-text">FL</span>
-						</n-avatar>
-					</template>					
+				<n-tab-pane name="tab-0" tab="Persons">
+					<n-scrollbar>
+						<n-spin class="app-spin-scroll" :show="false">
+							<n-list class="app-pad-tile-list app-margin-0">
+								<n-list-item v-for="i in 8">
+									<n-thing title="Your lookking for">
+										<template #description>
+											Is it me
+										</template>
 
-					<div class="content">
-						<n-h5 class="app-margin-0">First Last</n-h5>
-						<div>ID: 101010101010</div>
-						<div>Male — 15/07/1999</div>
-					</div>
-				</n-list-item>
-			</n-list>
-		</n-scrollbar>
+										Hello
+									</n-thing>
+								</n-list-item>
+							</n-list>
+						</n-spin>						
+					</n-scrollbar>
+				</n-tab-pane>
+			</n-tabs>
+		</n-card>
 
 		<div class="search-tab--pagination">
-			<n-pagination v-model:page="page" :page-count="100" />
+			<n-pagination :page="1" :page-count="100" />
 		</div>
 	</div>
 </template>
@@ -104,6 +139,14 @@
 		setup()
 		{
 			const page = ref(2);
+
+			const results =
+			[
+				{ }
+			]
+
+			// results
+			// [ "person" | "weapon" | "plate" ]: PersonResult | WeaponResult | PlateResult
 			return { page };
 		}
 	});
