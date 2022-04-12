@@ -109,7 +109,7 @@
 
 <script lang="ts">
 	import { defineComponent, ref } from "vue";
-	import { useStore } from "../../store";
+	import { useTabStore } from "../../stores/main-tab";
 
 	// components
 	import IconUserSearch from "~icons/tabler/user-search";
@@ -139,25 +139,21 @@
 		},
 		setup()
 		{
-			const store = useStore();
+			const tabStore = useTabStore();
+
+			// Methods
 
 			/**
 			 * Open a tab
 			 */
-			const openTab = (options: TabOpenOptions) =>
-			{
-				store.commit("openTab", options);
-			};
+			const openTab = (options: TabOpenOptions) => tabStore.openTab(options);
 
 			/**
 			 * Open a recent tab
 			 */
-			const openRecentTab = (tab: TabRecentItem) => 
-			{
-				const options: TabOpenOptions = { label: tab.title, component: tab.component };
+			const openRecentTab = (tab: TabRecentItem) => tabStore.openTab({ label: tab.title, component: tab.component });
 
-				store.commit("openTab", options);
-			};
+			// Variables
 
 			// Search
 			const search = ref<string>("");
@@ -171,10 +167,10 @@
 			]);
 
 			return {
-				search,
-				recentTabs,
 				openTab,
-				openRecentTab
+				openRecentTab,
+				search,
+				recentTabs
 			};
 		}
 	});
