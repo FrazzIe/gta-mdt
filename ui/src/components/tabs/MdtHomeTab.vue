@@ -204,7 +204,7 @@
 </style>
 
 <template>
-	<mdt-login v-if="!auth"></mdt-login>
+	<mdt-login v-if="!loggedIn"></mdt-login>
 
 	<div class="home-tab" v-else>
 		<!-- Button Navigation Tile -->
@@ -329,7 +329,7 @@
 			</template>
 
 			<div class="profile-container">
-				<n-avatar class="profile-avatar" :src="profile.avatar" @error="onAvatarError" v-if="hideAvatar"></n-avatar>				
+				<n-avatar class="profile-avatar" :src="profile.avatar" @error="hideAvatar" v-if="avatarHidden"></n-avatar>				
 				<n-avatar class="profile-avatar" v-else>
 					<n-icon>
 						<i-tabler-user/>
@@ -417,8 +417,9 @@
 </template>
 
 <script lang="ts">
-	import { defineComponent, ref } from "vue";
-	import { useStore } from "../../store";
+	import { defineComponent, ref, computed } from "vue";
+	import { useAuthUserStore } from "../../stores/auth-user";
+	import { useTabStore } from "../../stores/main-tab";
 
 	// interfaces
 	import TabOpenOptions from "../../interfaces/tabs/TabOpenOptions";
@@ -456,21 +457,36 @@
 		},
 		setup()
 		{
-			const store = useStore();
+			const authUserStore = useAuthUserStore();
+			const tabStore = useTabStore();
+
+			// Methods
+
+			/**
+			 * Open a tab
+			 */
+			const openTab = (options: TabOpenOptions) => tabStore.openTab(options);
+
+			/**
+			 * Hide avatar
+			 */
+			const hideAvatar = () => avatarHidden.value = true;
+
+			// Computed
+
+			// Check user auth
+			const loggedIn = computed(() => authUserStore.loggedIn);
+
+			// Useful user profile details
+			const profile = computed(() => authUserStore.profile);
+
+			// Variables
 
 			// Loading
 			const loading =
 			{
 				reports: true,
 				warrants: true
-			};
-
-			/**
-			 * Open a tab
-			 */
-			const openTab = (options: TabOpenOptions) =>
-			{
-				store.commit("openTab", options);
 			};
 
 			// Button Navigation Tile
@@ -488,11 +504,7 @@
 			const search = ref<string>("");
 
 			// User Tile
-			const hideAvatar = ref<boolean>(false);
-			const onAvatarError = function(): void
-			{
-				hideAvatar.value = true;
-			};
+			const avatarHidden = ref<boolean>(false);
 
 			// Active Warrants Tile
 			const activeWarrants = ref<WarrantReport[]>([
@@ -521,17 +533,17 @@
 			]);
 
 			return { 
+				openTab,
+				hideAvatar,
+				loggedIn,
+				profile,
 				loading,
-				hideAvatar,				
 				navigationButtons,
 				search,
+				avatarHidden,
 				activeWarrants,
 				latestReports,
-				statistics,
-				auth: store.state.auth,
-				profile: store.state.profile,
-				onAvatarError,
-				openTab
+				statistics
 			}
 		}
 	});
