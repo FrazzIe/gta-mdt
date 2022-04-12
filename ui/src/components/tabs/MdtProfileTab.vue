@@ -160,8 +160,8 @@
 </template>
 
 <script lang="ts">
-	import { defineComponent, ref } from "vue";
-	import { useStore } from "../../store";
+	import { defineComponent, ref, computed } from "vue";
+	import { useAuthUserStore } from "../../stores/auth-user";
 
 	// interfaces
 	import Report from "../../interfaces/report";
@@ -188,7 +188,14 @@
 		},
 		setup()
 		{
-			const store = useStore();
+			const authUserStore = useAuthUserStore();	
+
+			// Computed
+
+			// Useful user profile details
+			const profile = computed(() => authUserStore.profile);
+
+			// Variables
 
 			// Loading
 			const loading =
@@ -207,7 +214,7 @@
 			return {
 				loading,
 				latestReports,
-				profile: store.state.profile,
+				profile
 			};
 		}
 	});
