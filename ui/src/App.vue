@@ -148,24 +148,6 @@
 			MdtProfileTab,
 			MdtRecordTab
 		},
-		computed:
-		{
-			addableTab()
-			{
-				const addable = { disabled: true };
-
-				// auto disable if not authenticated or over limit
-				if (!this.$store.getters.canOpenTab)
-				{
-					return addable;
-				}
-
-				addable.disabled = false;
-
-				return addable;
-			},
-			...mapState(["tabs", "curTabId"])
-		},
 		setup()
 		{
 			const tabStore = useTabStore();
