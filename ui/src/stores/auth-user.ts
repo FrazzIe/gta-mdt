@@ -20,6 +20,15 @@ export const useAuthUserStore = defineStore("auth/user", {
 		loggedIn: (state) =>
 		{
 			return state.userId != null;
+		},
+		roleUppercase: (state) =>
+		{
+			if (state.role == null)
+			{
+				return "Unknown";
+			}
+
+			return state.role.charAt(0).toUpperCase() + state.role.slice(1).toLowerCase();
 		}
 	}
 });
