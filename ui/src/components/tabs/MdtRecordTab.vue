@@ -383,7 +383,6 @@
 
 <script lang="ts">
 	import { defineComponent, ref, reactive, computed } from "vue";
-	import { useStore } from "../../store";
 
 	// interfaces
 	import Report from "./../../interfaces/report";
@@ -414,8 +413,6 @@
 		},
 		setup()
 		{
-			const store = useStore();
-
 			// Loading
 			const loading =
 			{
