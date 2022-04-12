@@ -102,9 +102,9 @@
 				closable 
 				:addable="addableTab" 
 				:value="curTabId"
-				@add="onNewTab"
-				@close="onCloseTab"
-				@update:value="onUpdateTab"
+				@add="newTab"
+				@close="closeTab"
+				@update:value="updateTab"
 			>
 				<template #prefix>
 					<span class="app-tabs-prefix">Mobile Data Terminal</span>
@@ -125,8 +125,9 @@
 </template>
 
 <script lang="ts">
-	import { defineComponent } from "vue";
-	import { mapState } from "vuex";
+	import { defineComponent, computed } from "vue";
+	import { useTabStore } from "./stores/main-tab";
+
 
 	// components
 	import MdtHomeTab from "./components/tabs/MdtHomeTab.vue";
@@ -134,7 +135,6 @@
 	import MdtSearchTab from "./components/tabs/MdtSearchTab.vue";
 	import MdtProfileTab from "./components/tabs/MdtProfileTab.vue";
 	import MdtRecordTab from "./components/tabs/MdtRecordTab.vue";
-	// TODO
 
 	// theme
 	import { darkTheme } from "naive-ui";
@@ -166,34 +166,58 @@
 			},
 			...mapState(["tabs", "curTabId"])
 		},
-		methods:
-		{
-			/**
-			 * Add new tab
-			 */
-			onNewTab()
-			{
-				this.$store.commit("openTab", { label: "New Tab", component: "mdt-new-tab" });
-			},
-			/**
-			 * Close tab
-			 */
-			onCloseTab(name: string)
-			{
-				this.$store.commit("closeTab", { id: name });
-			},
-			/**
-			 * Update tab
-			 */
-			onUpdateTab(name: string)
-			{
-				this.$store.commit("updateTab", { id: name });
-			}
-		},
 		setup()
 		{
-			return {
-				darkTheme
+			const tabStore = useTabStore();
+
+			// Methods
+
+			/**
+			 * Open a new tab
+			 */
+			const newTab = () => tabStore.openTab({ label: "New Tab", component: "mdt-new-tab" });
+
+			/**
+			 * Close an existing tab
+			 */
+			const closeTab = (id: string) => tabStore.closeTab({ id });
+
+			/**
+			 * Update an existing tab
+			 */
+			const updateTab = (id: string) => tabStore.updateTab({ id });
+
+			// Computed
+
+			// addable tab data binding
+			const addableTab = computed((): { disabled: boolean } =>
+			{
+				const addable = { disabled: true };
+
+				if (!tabStore.canOpenTab)
+				{
+					return addable;
+				}
+
+				addable.disabled = false;
+
+				return addable;
+			});
+
+			// active tab
+			const curTabId = computed(() => tabStore.curId);
+
+			// collection of tabs
+			const tabs = computed(() => tabStore.tabs);
+
+			return {				
+				newTab,
+				closeTab,
+				updateTab,				
+				darkTheme,
+				addableTab,
+				curTabId,
+				tabs
 			}
 		}
 	});
